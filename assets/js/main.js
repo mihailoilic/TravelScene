@@ -97,6 +97,18 @@ let deals = {
             }]
     }
 }
+//inicijalizacija slika
+let tempDiv = document.createElement("div");
+for(country in deals){
+    for(img of deals[country].dealsList){
+        let temp = new Image();
+        temp.setAttribute("src",img.img);
+        tempDiv.appendChild(temp);
+    }
+}
+console.log(tempDiv);
+$(tempDiv).remove();
+
 let dealsWrapper = document.createElement("div");
 dealsWrapper.setAttribute("id","dealsWrapper");
 dealsWrapper.classList.add("row");
@@ -155,7 +167,7 @@ function createDeal(dealObj, countryTitle = "none"){
         $(dealBlock).fadeIn(200);
         setTimeout(() => {
             $(dealsWrapper).removeAttr("style");
-        },200);
+        },100);
     });
 }
 function createDealCountries(){
@@ -185,7 +197,7 @@ function countrySelected(countryObj){
         backBtn.innerHTML = `<span class="fa fa-angle-left"></span> Countries`;
         dealsWrapper.appendChild(backBtn);
         for(deal in countryObj.dealsList){
-        createDeal(countryObj.dealsList[deal],countryObj.title);
+            createDeal(countryObj.dealsList[deal],countryObj.title);
         }
     },300);
         
