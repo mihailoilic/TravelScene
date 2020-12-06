@@ -153,6 +153,9 @@ function createDeal(dealObj, countryTitle = "none"){
     dealsWrapper.appendChild(dealBlock);
     $(dealBlock).ready(function(){
         $(dealBlock).fadeIn(200);
+        setTimeout(() => {
+            $(dealsWrapper).removeAttr("style");
+        },200);
     });
 }
 function createDealCountries(){
@@ -161,9 +164,6 @@ function createDealCountries(){
         for(country in deals){
             createDeal(deals[country]);
         }
-        setTimeout(() => {
-            $(dealsWrapper).removeAttr("style");
-        },200);
     },300);
 
 }
@@ -187,9 +187,6 @@ function countrySelected(countryObj){
         for(deal in countryObj.dealsList){
         createDeal(countryObj.dealsList[deal],countryObj.title);
         }
-        setTimeout(() => {
-            $(dealsWrapper).removeAttr("style");
-        },200);
     },300);
         
 }
