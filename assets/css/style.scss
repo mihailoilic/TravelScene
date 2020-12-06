@@ -1,0 +1,60 @@
+.primary-color {
+    color: #fc5b62;
+}
+.text-shadow {
+    text-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+.site-logo a{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #fff;
+    span {       
+	    color: #fc5b62;
+    }
+}
+
+#navigation.navbar-fixed {
+    padding: 25px 0;
+}
+#main-menu {
+    margin-top: 0px;
+}
+.single_package {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+#dealsWrapper{
+    position: relative; 
+    .deals-backBtn{
+        position: absolute;
+        top: -45px;
+        left: 0px;
+        margin-left: 15px;
+        font-size: 1.2em;
+    }
+}
+.modal {
+    background: rgba(0, 0, 0, 0.0);
+    overflow-y: scroll;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .2s, opacity .2s, background .5s;
+    .modal-dialog {
+        transition: transform .2s;
+        transform: scale(.9,.9);
+    }
+    &.modalShow {
+        visibility: visible;
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.4);
+        .modal-dialog {
+            transform: scale(1,1);
+        }
+    }
+    span.icofont-close-line{
+        font-size: 1.3em;
+    }
+    #person option{
+        color: #000;
+    }
+}

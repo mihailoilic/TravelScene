@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>TRAVELSCENE - Your Perfect Vacation</title>
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">		
+		<!-- Google Font -->	
+		<link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&amp;display=swap" rel="stylesheet">
+		<!-- Font Awesome CSS -->
+		<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/fonts/themify-icons.css">
+		<link rel="stylesheet" href="assets/fonts/icofont/icofont.css">
+		<!-- Style CSS -->
+		<link rel="stylesheet" href="assets/css/laveria.css">	
+		<link rel="stylesheet" href="assets/css/style.css">
+	</head>
+	
+	<body>
+		<!-- Preloader -->
+		<div class="preloader">
+			<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>		
+		</div>
+		<!-- START NAVBAR -->  
+		<div id="navigation" class="fixed-top navbar-light bg-faded site-navigation">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 col-md-3 col-sm-4 d-flex align-items-center">
+						<div class="site-logo">
+							<a href="index.html"><i class="fa fa-compass d-inline primary-color"></i>TRAVEL<span>SCENE</span></a>          				
+						</div>
+					</div><!--- END Col -->
+					
+					<div class="col-lg-10 col-md-9">
+						<div class="header_right">
+							<nav id="main-menu" class="ml-auto d-none d-lg-flex align-items-center">
+								<ul>
+								  <li  class="text-shadow"><a href="#home">Home</a></li>					  
+								  <li  class="text-shadow"><a href="#deals">Pick destination</a></li>
+								  <li  class="text-shadow"><a href="#special_package">Top deals <i class="icofont-rounded-down"></i></a>
+									<ul>
+										<li><a href="">DEAL 1</a></li>				
+									</ul>
+								  </li>
+								  <li  class="text-shadow"><a href="#why_choose">Why us</a></li>
+								  <li  class="text-shadow"><a href="#gallery">Gallery</a></li>
+								  <li  class="text-shadow"><a href="#contact">Contact</a></li>
+								</ul>
+							</nav>
+							<div id="mobile_menu"></div>
+						</div>
+					</div><!--- END Col -->
+				</div><!--- END ROW -->
+			</div><!--- END CONTAINER -->
+		</div> 	  
+		<!-- END NAVBAR -->
+
+		<!-- START SLIDER -->
+		<section id="home" class="home-slider" >			
+			<div class="single_home_slide" style="background-image: url(assets/img/slider/1.jpg);  background-size:cover; background-position: center center;">
+				<div class="slide_overlay">
+					<div class="container">
+						<div class="row">
+						  <div class="col-md-12 text-center">
+							<div class="hero-text">
+								<h1 class="text-shadow">
+									We Will Plan Your Perfect Vacation
+								</h1>
+								<p>Your dream trip could be one just click away.</p>
+								<a href="#deals" class="btn btn-default btn-home-bg">Give us a try <i class="icofont-long-arrow-right"></i></a>						
+							</div>
+						  </div><!--- END COL -->			  
+						</div><!--- END ROW -->
+					</div><!--- END CONTAINER -->
+				</div><!--- END slide -->			
+			</div><!--- END slide -->			
+			
+			
+		<!-- END  SLIDER -->
+	
+		<!-- START DEALS & ORDER MODAL -->
+		<div id="dealModal" onClick="modalClose(event);" class="modal">
+			<div class="modal-dialog modal-xl" onClick="stopPropagation(event);">
+			  <div class="modal-content border-0 shadow-lg px-3 py-2">
+				<div class="modal-header border-0">
+				  <h5 class="modal-title font-weight-light mt-2 ml-2">Tour details</h5>
+				  <button type="button" onClick="modalClose(event);" class="close">
+					<span class="icofont-close-line"></span>
+				  </button>
+				</div>
+				<div class="modal-body p-4 pt-5 row d-flex justify-content-between">
+				  <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column">
+					  <div id="modalLeftHeader" class="row justify-content-center justify-content-lg-start"></div>
+					  <div id="modalLeftBody" class="my-3"></div>
+				  </div>
+				  <div class="col-12 col-lg-5 col-xl-5">
+					<div class="book_now">
+						<h4>Tour Booking</h4>
+						<form id="bookForm" method="post">
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" name="fullName" class="form-control" id="full-name" placeholder="Full Name">
+								</div>
+								<div class="form-group col-md-12">
+									<input type="email" name="email" class="form-control" id="email" placeholder="Email">
+								</div>
+								<div class="form-group col-md-12">
+									<input type="text" name="phone" class="form-control" id="phone" placeholder="Phone">
+								</div>
+								<div class="form-group col-md-12">
+									<input type="text" name="date" class="form-control" id="date" placeholder="Date" required="required">
+								</div>
+								<div class="form-group col-md-12">
+									<select name="person" class="form-control" id="person">
+										<option value="0">No of Persons</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+								<div class="col-md-12">
+									<div class="actions">
+										<input type="submit" value="Submit" name="submit" class="book_now_btn"/>
+									</div>
+								</div>
+							</div>
+						</form>	
+					</div>
+				  </div>
+				</div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		<!-- END DEALS & ORDER MODAL -->	
+
+
+		<!-- START DEALS -->
+		<section id="deals" class="container top_deals">
+				<div class="row mb-5">
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<span>Pick Your Destination</span>
+							<h2>Where Would You Like to Go?</h2>
+							<h5 class="font-weight-light">Choose a country - we will make you an offer you won't resist!</h5>							
+						</div>
+					</div>
+				</div>		
+				<!-- Dinamicki sadrzaj -->
+		</section>
+		<!-- END DEALS -->	
+
+		<!-- START SPECIAL PACKAGE -->
+		<section id="special_package" class="special_package section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<span>Popular Tour Package</span>
+							<h2>The Best Of Our All <br> Tour Packages</h2>							
+						</div>
+					</div><!-- END COL -->
+				</div><!-- END ROW -->		
+				
+				<div class="row text-left">
+					<div class="row col-md-12 justify-content-center">
+						<!-- <div id="package-slider"> -->
+							<div class="single_package col-12 col-md-5 p-0">
+								<a href="#">
+									<div class="pack_image">
+										<img class="img-fluid" src="assets/img/package/1.jpg" alt="">		
+										<span class="pack_price">$236</span>
+									</div>
+									<div class="package-hover">
+										<div class="tour-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>																					
+										<h5>Brazil Sea Beach</h5>
+										<div class="tour-locaton"><i class="icofont-location-pin"></i> Praia do Cassino Beach, Brazil</div>
+										<span class="time_zone">5 days - 4 night</span>
+										
+									</div>
+								</a>
+							</div><!-- END SINGLE PACKAGE -->
+							
+							<div class="single_package col-12 col-md-5 p-0">
+								<a href="#">
+									<div class="pack_image">
+										<img class="img-fluid" src="assets/img/package/2.jpg" alt="">		
+										<span class="pack_price">$236</span>
+									</div>
+									<div class="package-hover">
+										<div class="tour-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>																					
+										<h5>Brazil Sea Beach</h5>
+										<div class="tour-locaton"><i class="icofont-location-pin"></i> Praia do Cassino Beach, Brazil</div>
+										<span class="time_zone">5 days - 4 night</span>
+										
+									</div>
+								</a>
+							</div>
+						<!-- </div> -->
+					</div><!-- END COL -->
+				</div><!-- END ROW -->
+			</div><!-- END CONTAINER -->
+		</section>
+		<!-- END SPECIAL PACKAGE -->
+		
+		<!-- START WHY CHOOSE US -->	
+		<section id="why_choose" class="why_choose">			
+			<div class="container">	
+				<div class="row text-left align-items-center">
+					<div class="col-md-6">	
+						<div class="why-choose-img">
+							<img src="assets/img/why-choose-us/why-choose-us.jpg" alt="Big image">
+							<a href="#" class="video-btn"><i class="icofont-ui-play"></i></a>
+						</div>
+					</div>	
+					
+					<div class="col-md-6 pl-30">	
+						<div class="row">
+							<div class="col-md-12">
+								<div class="section-title text-left why_title">
+									<span>Why Choose Us?</span>
+									<h2>Every Time We Provide <br> best Service</h2>							
+								</div>
+							</div><!-- END COL -->
+						</div><!-- END ROW -->	
+						
+						<div class="row">
+							<div class="col-lg-6 col-sm-6 col-xs-12">
+								<div class="single-choose mb-20">
+									<i class="icofont-man-in-glasses"></i>
+									<div class="choose-content">
+										<h4>Best Travel Guide</h4>
+										<p>Lorem Ipsum is simply dummy text of the printing typesetting</p>
+									</div>
+								</div>
+							</div><!-- END COL -->
+							
+							<div class="col-lg-6 col-xs-12 pr-0">
+								<div class="single-choose mb-20">
+									<i class="icofont-world"></i>
+									<div class="choose-content">
+										<h4>World Class Service</h4>
+										<p>Lorem Ipsum is simply dummy text of the printing typesetting</p>
+									</div>
+								</div>
+							</div><!-- END COL -->
+							
+							<div class="col-lg-6 col-xs-12">
+								<div class="single-choose">									
+									<i class="icofont-ui-wifi"></i>
+									<div class="choose-content">
+										<h4>Free Wifi</h4>
+										<p>Lorem Ipsum is simply dummy text of the printing typesetting</p>
+									</div>
+								</div>
+							</div><!-- END COL -->		
+
+							<div class="col-lg-6 col-xs-12 pr-0">
+								<div class="single-choose">									
+									<i class="icofont-live-support"></i>
+									<div class="choose-content">
+										<h4>24/7 Support</h4>
+										<p>Lorem Ipsum is simply dummy text of the printing typesetting</p>
+									</div>
+								</div>
+							</div><!-- END COL -->			
+						</div>
+					</div><!-- END COL -->	
+
+				</div><!-- END ROW -->
+			</div><!-- END CONTAINER -->			
+		</section>
+		<!-- END WHY CHOOSE US -->
+		
+		
+		<!-- START GALLERY -->
+		<section id="gallery" class="our_gallery section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<span>Tour Gallery</span>
+							<h2>Best Tourist's Shared <br> Photos</h2>							
+						</div>
+					</div><!-- END COL -->
+				</div><!-- END ROW -->	
+				
+				<div class="portfolio-grid">
+					<div class="row">
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/1.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/1.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>India</h4>
+							</div>
+						</div><!-- End Col -->
+						
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/2.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/2.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>Dubai</h4>
+							</div>
+						</div><!-- End Col -->	
+						
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/3.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/3.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>Bangladesh</h4>
+							</div>
+						</div><!-- End Col -->
+						
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/4.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/4.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>Malyasia</h4>
+							</div>
+						</div><!-- End Col -->	
+						
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/5.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/5.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>Japan</h4>
+							</div>
+						</div><!-- End Col -->		
+						
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/6.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/6.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>Germany</h4>
+							</div>
+						</div><!-- End Col -->	
+
+						<div class="col-lg-4 col-md-6 col-12 portfolio-item">
+							<div class="single-gallery">
+								<img src="assets/img/gallery/7.jpg" alt="gallery Image">
+								<a href="assets/img/gallery/7.jpg" class="gallery_enlarge_icon"><i class="ti-zoom-in"></i></a>
+								<h4>London</h4>
+							</div>
+						</div><!-- End Col -->	
+								
+					</div>
+					
+				</div><!-- END portfolio-grid -->
+			</div>
+			
+			<div class="container mt-20">
+				<div class="row">
+					<div class="col-12 text-center">
+						<a href="#" class="gallery-btn">View All Photos  <i class="icofont-long-arrow-right"></i></a>
+					</div>					
+				</div>
+			</div>
+			
+		</section>
+		<!-- END GALLERY -->
+		
+		<!-- START COUNTER -->
+		<section class="counterup-area section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 aos-init aos-animate">
+						<div class="section-title text-center">
+							<span>Company Statistics</span>
+							<h2>We Expert our Goals & We Strive <br> To Provide Best</h2>							
+						</div>
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="single-counter">
+							<i class="icofont-users-alt-3"></i>
+							<div class="counter-content">
+								<h2 class="counter-num">32652</h2>
+								<p>Happy Customers <span></span></p>
+							</div>
+						</div>
+					</div><!-- END COL -->
+					
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="single-counter">
+							<i class="icofont-airplane"></i>
+							<div class="counter-content">
+								<h2 class="counter-num">1821</h2>
+								<p>Amazing Tours <span></span></p>
+							</div>
+						</div>
+					</div><!-- END COL -->
+					
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="single-counter">
+							<i class="icofont-handshake-deal"></i>
+							<div class="counter-content">
+								<h2 class="counter-num">5660</h2>
+								<p>In Business <span></span></p>
+							</div>
+						</div>
+					</div><!-- END COL -->
+					
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="single-counter">
+							<i class="icofont-live-support"></i>
+							<div class="counter-content">
+								<h2 class="counter-num">11859</h2>
+								<p>Support Cases <span></span></p>
+							</div>
+						</div>
+					</div><!-- END COL -->
+				</div>	
+			</div><!-- END CONTAINER -->
+		</section>
+		<!-- END COUNTER -->
+
+	
+		
+		
+		
+		
+		<!-- START BLOG -->
+		<section id="blog" class="blog_section">						
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<span>Latest Blog Posts</span>
+							<h2>Our Latest Article <br> For Travellers</h2>							
+						</div>
+					</div><!-- END COL -->
+				</div><!-- END ROW -->		
+				
+				<div class="row">	
+					<div class="col-lg-4 col-md-6">
+						<div class="single_blog">
+							<div class="blog_image">
+								<img class="blog-photo" alt="Blog Photo" src="assets/img/blog/1.jpg"/>
+							</div>
+							
+							<div class="blog-text">
+								<div class="post-meta">	
+									<span class="float-left">
+										<i class="icofont-clock-time"></i> 15 May 2020
+									</span>	
+
+									<span class="float-right">
+										<i class="icofont-comment"></i> <a href="#" class="comments-link">0 Comments</a>
+									</span>
+								</div>		
+								
+								<h4><a href="#">Gray and Black Dslr Camera Beside Sun Hat</a></h4>		
+								<p>
+									 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et quam sollicitudin mi tincidunt faucibus 
+								</p>
+								<a href="#" class="post-btn">View Details <i class="icofont-long-arrow-right"></i></a>
+							</div>							
+						</div>
+					</div><!--- END COL -->
+					
+					<div class="col-lg-4 col-md-6">
+						<div class="single_blog">
+							<div class="blog_image">
+								<img class="blog-photo" alt="Blog Photo" src="assets/img/blog/2.jpg"/>
+							</div>
+							
+							<div class="blog-text">
+								<div class="post-meta">	
+									<span class="float-left">
+										<i class="icofont-clock-time"></i> 15 May 2020
+									</span>	
+
+									<span class="float-right">
+										<i class="icofont-comment"></i> <a href="#" class="comments-link">0 Comments</a>
+									</span>
+								</div>	
+								
+								<h4><a href="#">Golden Gate Bridge, San Francisco</a></h4>		
+								<p>
+									 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et quam sollicitudin mi tincidunt faucibus 
+								</p>
+								<a href="#" class="post-btn">View Details <i class="icofont-long-arrow-right"></i></a>
+							</div>							
+						</div>
+					</div><!--- END COL -->
+					
+					<div class="col-lg-4 col-md-6">
+						<div class="single_blog">
+							<div class="blog_image">
+								<img class="blog-photo" alt="Blog Photo" src="assets/img/blog/3.jpg"/>
+							</div>
+							
+							<div class="blog-text">
+								<div class="post-meta">	
+									<span class="float-left">
+										<i class="icofont-clock-time"></i> 15 May 2020
+									</span>	
+
+									<span class="float-right">
+										<i class="icofont-comment"></i> <a href="#" class="comments-link">0 Comments</a>
+									</span>
+								</div>	
+								
+								<h4><a href="#">Brown Pendant Lamp Hanging on Trees</a></h4>		
+								<p>
+									 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et quam sollicitudin mi tincidunt faucibus 
+								</p>
+								<a href="#" class="post-btn">View Details <i class="icofont-long-arrow-right"></i></a>
+							</div>							
+						</div>
+					</div><!--- END COL -->
+			
+				</div><!--- END ROW -->
+			</div><!--- END CONTAINER -->
+		</section> 
+		<!-- END BLOG -->
+		
+		<!-- START TESTIMONIAL -->
+		<section class="testimonial" style="background-image: url(assets/img/bg/section-bg.jpg);">
+			<div class="overlay section-padding">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-title text-center white-title">
+								<span>Testimonials</span>
+								<h2>What our Happy Customers <br>Say About Us</h2>							
+							</div>
+						</div><!-- END COL -->
+					</div><!-- END ROW -->	
+					
+					<div class="row">
+						<div class="col-md-12 d-block mx-auto text-center">
+							<div id="testimonial-slider" class="owl-carousel">
+							
+								<div class="single-testimonial">								
+									<div class="testimonial-content">										
+										Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent bibendum dolor eros imperdiet amet hendrerit																		
+									</div>
+							
+									<div class="testimonial-bottom">
+										<img src="assets/img/review/1.png" width="50" alt="review image">
+										<h3 class="title">Williamson</h3>
+										<div class="test-rating">
+											<ul class="list-inline">
+												<li class="list-inline-item">								
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+												</li>
+											</ul>
+										</div>
+									</div>											
+								</div><!-- END single Testimonials -->
+
+								<div class="single-testimonial">								
+									<div class="testimonial-content">										
+										Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent bibendum dolor eros imperdiet amet hendrerit																		
+									</div>
+							
+									<div class="testimonial-bottom">
+										<img src="assets/img/review/2.png" width="50" alt="review image">
+										<h3 class="title">Williamson</h3>
+										<div class="test-rating">
+											<ul class="list-inline">
+												<li class="list-inline-item">								
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+												</li>
+											</ul>
+										</div>
+									</div>											
+								</div><!-- END single Testimonials -->
+
+								<div class="single-testimonial">								
+									<div class="testimonial-content">										
+										Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent bibendum dolor eros imperdiet amet hendrerit																		
+									</div>
+							
+									<div class="testimonial-bottom">
+										<img src="assets/img/review/3.png" width="50" alt="review image">
+										<h3 class="title">Williamson</h3>
+										<div class="test-rating">
+											<ul class="list-inline">
+												<li class="list-inline-item">								
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+												</li>
+											</ul>
+										</div>
+									</div>											
+								</div><!-- END single Testimonials -->	
+								
+								<div class="single-testimonial">								
+									<div class="testimonial-content">										
+										Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent bibendum dolor eros imperdiet amet hendrerit																		
+									</div>
+							
+									<div class="testimonial-bottom">
+										<img src="assets/img/review/2.png" width="50" alt="review image">
+										<h3 class="title">Williamson</h3>
+										<div class="test-rating">
+											<ul class="list-inline">
+												<li class="list-inline-item">								
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+													<i class="icofont-star"></i>									
+												</li>
+											</ul>
+										</div>
+									</div>											
+								</div><!-- END single Testimonials -->	
+								
+	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- END TESTIMONIAL -->
+
+		<!-- START CONTACT FORM-->
+		<section id="contact" class="contact_area section-padding">
+			<div class="container">			
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<span>Contact Us</span>
+							<h2>If You Have any Question <br> Drop a Message</h2>							
+						</div>
+					</div><!-- END COL -->
+				</div><!-- END ROW -->	
+				
+				<div class="row align-items-center">				
+					<div class="col-lg-7 col-sm-12 col-xs-12 d-block mx-auto">
+						<div class="contact">
+							<form id="contact-form" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<input type="text" name="name" class="form-control" id="first-name" placeholder="Name" required="required">
+									</div>
+									<div class="form-group col-md-6">
+										<input type="email" name="email" class="form-control" id="first-email" placeholder="Email" required="required">
+									</div>
+									<div class="form-group col-md-12">
+										<input type="text" name="subject" class="form-control" id="subject" placeholder="Subject" required="required">
+									</div>
+									<div class="form-group col-md-12">
+										<textarea rows="6" name="message" class="form-control" id="description" placeholder="Your Message" required="required"></textarea>
+									</div>
+									<div class="col-md-12">
+										<div class="actions text-left">
+											<input type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-lg btn-contact-bg" title="Submit Your Message!" />
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div><!-- END COL -->
+					
+					<div class="col-lg-5 col-sm-12 col-xs-12 d-block mx-auto">
+						<div class="contact_address text-left">			
+							<div class="single-contact-info">
+								<i class="icofont-google-map"></i>
+								<p>2369 Robinson Lane Jackson<br /> OH 45640</p>
+							</div>
+											
+							<div class="single-contact-info">
+								<i class="icofont-headphone-alt"></i>
+								<p>
+									(+1) 740-395-3829<br />
+									(+1) 740-982-9821
+								</p>
+							</div>
+
+							<div class="single-contact-info">
+								<i class="icofont-ui-email"></i>
+								<p>
+									help@Laveria.com<br />
+									info@Laveria.com
+								</p>
+							</div>
+							
+						</div>
+					</div><!-- END COL -->	
+					
+			
+				</div><!--- END ROW -->				
+			</div><!--- END CONTAINER -->	
+		</section>
+		<!-- END CONTACT FORM -->	
+		
+		<!-- START MAP -->
+		<div class="google-map">
+			<iframe width="600" height="450" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50431.01496117057!2d144.9372018671769!3d-37.81441383014957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sbd!4v1572172541109!5m2!1sen!2sbd" ></iframe>
+		</div>
+		<!-- END MAP -->
+		
+		<!-- START FOOTER -->
+		<div class="footer">
+			<div class="container">
+				<div class="row">	
+					<div class="col-lg-12 col-md-12 footer-top">
+						<div class="row">	
+							<div class="col-lg-3">						
+								<div class="footer-widget">	
+									<div class="foot-logo">
+										<a href="index-2.html"><img src="assets/img/logo.png" alt=""></a>				
+									</div>
+									<p class="copyright_text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum .</p>				
+								</div>						
+							</div><!--- END COL -->				
+
+							<div class="col-lg-3">						
+								<div class="footer-widget">
+									<h3 class="fot-title">Quick Links</h3>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Term</a></li>
+										<li><a href="#">Privacy & Policy</a></li>
+										<li><a href="#">Blog</a></li>
+										<li><a href="#">Contact Us</a></li>
+									</ul>
+								</div>						
+							</div><!--- END COL -->				
+
+							<div class="col-lg-3">						
+								<div class="footer-widget">	
+									<h3 class="fot-title">About Us</h3>
+									<ul>
+										<li><a href="#">Our Story</a></li>
+										<li><a href="#">Travel Blog & Tips</a></li>
+										<li><a href="#">gallerying With Us</a></li>
+										<li><a href="#">Tour Guid</a></li>
+										<li><a href="#">Be Our Partner</a></li>
+									</ul>
+								</div>						
+							</div><!--- END COL -->			
+
+							<div class="col-lg-3">						
+								<div class="footer-widget">	
+									<h3 class="fot-title">Support</h3>
+									<ul>
+										<li><a href="#">Customer Support</a></li>
+										<li><a href="#">Privacy & Policy</a></li>
+										<li><a href="#">Terms & Condition</a></li>
+										<li><a href="#">Forum</a></li>
+										<li><a href="#">Tour Guid</a></li>
+									</ul>
+								</div>						
+							</div><!--- END COL -->					
+						</div>
+					</div>
+					
+					<div class="col-md-12 text-center">
+						<div class="footer-bottom">
+							<p class="copyright_text">
+								Copyright @ 2020 <a href="#">Laveria</a> all right reserved.						
+							</p>
+							<ul class="foot_social_link">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+							</ul>					
+						</div>
+					</div>					
+				</div><!--- END ROW -->				
+			</div><!--- END CONTAINER -->
+		</div>
+		<!-- END FOOTER -->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>		
+		<script type="text/javascript" src="assets/js/main.js"></script>
+    </body>
+
+<!-- Mirrored from themesvila.com/html-templates/laveria/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Oct 2020 11:10:53 GMT -->
+</html>

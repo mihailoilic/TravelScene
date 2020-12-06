@@ -1,0 +1,48 @@
+<section id="service" class="our_services">
+		   <div class="container">				
+				<div class="row text-center">					
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="service text-center">
+							<div class="icon color-1"><i class="icofont-bed"></i></div>
+							<h4>Delux Room</h4>
+							<p>
+								  Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy 
+							</p>
+						</div>
+					</div><!-- END COL -->		
+
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="service text-center">
+							<div class="icon color-2"><i class="icofont-fast-food"></i></div>
+							<h4>Delicoius Food</h4>
+							<p>
+								 Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy  
+							</p>
+						</div>
+					</div><!-- END COL -->	
+
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="service text-center">
+							<div class="icon color-3"><i class="icofont-taxi"></i></div>
+							<h4>Airport Taxi</h4>
+							<p>
+								 Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy 
+							</p>
+						</div>
+					</div><!-- END COL -->
+									
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="service text-center">
+							<div class="icon color-4"><i class="icofont-bowling-alt"></i></div>
+							<h4>Game Room</h4>
+							<p>
+								 Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy  
+							</p>
+						</div>
+					</div><!-- END COL -->
+					
+					
+																		
+				</div><!-- END ROW -->
+			</div><!-- END CONTAINER -->
+		</section>

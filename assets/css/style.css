@@ -1,0 +1,81 @@
+.primary-color {
+  color: #fc5b62;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+
+.site-logo a {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #fff;
+}
+
+.site-logo a span {
+  color: #fc5b62;
+}
+
+#navigation.navbar-fixed {
+  padding: 25px 0;
+}
+
+#main-menu {
+  margin-top: 0px;
+}
+
+.single_package {
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#dealsWrapper {
+  position: relative;
+}
+
+#dealsWrapper .deals-backBtn {
+  position: absolute;
+  top: -45px;
+  left: 0px;
+  margin-left: 15px;
+  font-size: 1.2em;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0);
+  overflow-y: scroll;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility .2s, opacity .2s, background .5s;
+  transition: visibility .2s, opacity .2s, background .5s;
+}
+
+.modal .modal-dialog {
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
+  -webkit-transform: scale(0.9, 0.9);
+          transform: scale(0.9, 0.9);
+}
+
+.modal.modalShow {
+  visibility: visible;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal.modalShow .modal-dialog {
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+}
+
+.modal span.icofont-close-line {
+  font-size: 1.3em;
+}
+
+.modal #person option {
+  color: #000;
+}
+/*# sourceMappingURL=style.css.map */
