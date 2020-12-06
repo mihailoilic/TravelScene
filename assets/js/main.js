@@ -2,20 +2,99 @@
 $(document).ready(function() {
     $(window).on("load",function() {
         $(".preloader").fadeOut();
+        navScrollEvent();
     });
-    navScrollEvent();
     $(this).scroll(navScrollEvent);
+    $("#home .hero-text a").click(function(event){
+        scrollTo("#deals");
+        event.preventDefault();
+        $(this).blur();
+    });
 });
-
 function navScrollEvent(){
-    if(window.scrollY > 100){
+    if($(window).scrollTop() > 100){
         $("#navigation").addClass("navbar-fixed");
     }
     else {
         $("#navigation").removeClass("navbar-fixed");
     }
+    let links = $("#navigation .header_right a");
+    $(links).removeClass("primary-color");
+    for(let i = links.length - 1; i >= 0; i--){
+        if($(window).scrollTop() >= elementTop($(links[i]).attr("href")) - 1){
+            $(links[i]).addClass("primary-color");
+            break;
+        }
+    }
 }
-//DEALS - dinamicki sadrzaj
+function scrollTo(elementId){
+    let scrollDistance = elementTop(elementId);
+    $("html").stop().animate({scrollTop:`${scrollDistance}px`}, 400);
+}
+function elementTop(elementId){
+    let t = document.querySelector(elementId).getBoundingClientRect().top;
+    return  t + $(window).scrollTop();
+}
+//Dinamicko ucitavanje navigacije
+let navigation = new Array(
+    {
+        type: "single",
+        title: "Home",
+        href: "#home"
+    },
+    {
+        type: "single",
+        title: "Pick destination",
+        href: "#deals"
+    },
+    {
+        type: "menu",
+        title: "Top deals",
+        href: "#special_package"
+    },
+    {
+        type: "single",
+        title: "Why us",
+        href: "#why_choose"
+    },
+    {
+        type: "single",
+        title: "Gallery",
+        href: "#gallery"
+    },
+    {
+        type: "single",
+        title: "Contact",
+        href: "#contact"
+    }
+);
+let navWrapper = document.createElement("nav");
+navWrapper.setAttribute("id","main-menu");
+navWrapper.classList.add("ml-auto","d-none","d-lg-flex", "align-items-center");
+document.querySelectorAll("#navigation .header_right")[0].appendChild(navWrapper);
+let lista = document.createElement("ul");
+navWrapper.appendChild(lista);
+for (i in navigation){
+    let navLi = document.createElement("li");
+    navLi.classList.add("text-shadow");
+    let navA = document.createElement("a");
+    navA.setAttribute("href", navigation[i].href);
+    navA.appendChild(document.createTextNode(navigation[i].title));
+    navA.addEventListener("click", function(event) {
+        event.preventDefault();
+        scrollTo($(this).attr("href"));
+        $(this).blur();
+    });
+    if(navigation[i].type == "menu") {
+        let arrow = document.createElement("span");
+        arrow.classList.add("icofont-rounded-down");
+        navA.appendChild(arrow);
+    }
+    navLi.appendChild(navA);
+    lista.appendChild(navLi);
+}
+
+//Deals - dinamicki sadrzaj
 let deals = {
     "th": {
         type: "country",
@@ -54,7 +133,7 @@ let deals = {
             type: "deal",
             title:"Manila",
             img: "assets/img/deals/manila.jpg",
-            stars: 5,
+            stars: 4,
             description: "Manila offers many attractions for travelers. Historic Intramuros is a good place to start. This walled city is filled with Spanish-era architecture including the Manila Cathedral, Fort Santiago, and San Agustin Church (a UNESCO World Heritage Site). Meanwhile, Makati and Bonifacio Global City (BGC) are the best places to go to experience the nightlife, hip food scene, and the modern side of the city. Beat the tropical heat & shop at Manila’s massive malls.",
             price: 860
         },
@@ -91,13 +170,13 @@ let deals = {
             type: "deal",
             title:"Marseille",
             img: "assets/img/deals/marseille.jpg",
-            stars: 5,
+            stars: 4,
             description: "Sitting on the edge of the Mediterranean, Marseille is nothing like Paris, and that’s a good thing. With almost constant sunshine, miles of beautiful beaches, and a wonderful mix of cultures—the city has a flavor you won’t find anywhere else in France...",
             price: 760
             }]
     }
-}
-//prva inicijalizacija slika
+};
+//inicijalizacija slika
 for(country in deals){
     for(image of deals[country].dealsList){
         let temp = document.createElement("img");
@@ -154,17 +233,18 @@ function createDeal(dealObj, countryTitle = "none"){
         for (let i = 0; i < dealObj.stars; i++){
             stars.innerHTML += `<span class="fa fa-star"></span>`;
         }
+        for(let i = 0; i < 5 - dealObj.stars; i++){
+            stars.innerHTML += `<span class="fa fa-star text-white-50"></span>`;
+        }
         dealH4.appendChild(stars);
         dealLink.addEventListener("click", () => {openModal(dealObj, countryTitle);})
     }
     $(dealBlock).hide();
     dealsWrapper.appendChild(dealBlock);
-    $(dealBlock).ready(function(){
-        $(dealBlock).fadeIn(200);
-        setTimeout(() => {
-            $(dealsWrapper).removeAttr("style");
-        },100);
-    });
+    $(dealBlock).fadeIn(200);
+    setTimeout(() => {
+        $(dealsWrapper).removeAttr("style");
+    },100);
 }
 function createDealCountries(){
     clearDealsWrapper();
@@ -181,7 +261,6 @@ function clearDealsWrapper(){
         $(this).html("");
         $(this).show();
     });
-    
 }
 function countrySelected(countryObj){
     clearDealsWrapper();
@@ -192,12 +271,11 @@ function countrySelected(countryObj){
         backBtn.addEventListener("click", createDealCountries);
         backBtn.innerHTML = `<span class="fa fa-angle-left"></span> Countries`;
         dealsWrapper.appendChild(backBtn);
-        for(deal in countryObj.dealsList){
-            createDeal(countryObj.dealsList[deal],countryObj.title);
+        for(deal of countryObj.dealsList){
+            createDeal(deal, countryObj.title);
         }
     },300);
-    $("html").animate({scrollTop: `${$("#deals").offset().top}px`},200);
-        
+    scrollTo("#deals");
 }
 function openModal(dealObj,countryTitle){
     $(document.body).css("overflow", "hidden");
@@ -206,10 +284,12 @@ function openModal(dealObj,countryTitle){
     for(let i = 0; i < dealObj.stars; i++){
         header += `<span class="fa fa-star"></span>`;
     }
+    for(let i = 0; i < 5 - dealObj.stars; i++){
+        header += `<span class="fa fa-star text-black-20"></span>`;
+    }
     header += `</div><div class="primary-color">$${dealObj.price.toLocaleString()}</div></div>`;
     $("#modalLeftHeader").html(header);
     $("#modalLeftBody").html(`<p>${dealObj.description}</p>`);
-    
 }
 function modalClose(event){
     $(document.body).css("overflow", "visible");

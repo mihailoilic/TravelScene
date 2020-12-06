@@ -1,5 +1,9 @@
 .primary-color {
-  color: #fc5b62;
+  color: #fc5b62 !important;
+}
+
+.text-black-20 {
+  color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .text-shadow {
