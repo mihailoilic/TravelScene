@@ -196,6 +196,7 @@ function countrySelected(countryObj){
             createDeal(countryObj.dealsList[deal],countryObj.title);
         }
     },300);
+    $("html").animate({scrollTop: `${$("#deals").offset().top}px`},200);
         
 }
 function openModal(dealObj,countryTitle){
