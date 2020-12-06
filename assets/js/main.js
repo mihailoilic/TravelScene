@@ -97,18 +97,14 @@ let deals = {
             }]
     }
 }
-//inicijalizacija slika
-let tempDiv = document.createElement("div");
+//prva inicijalizacija slika
 for(country in deals){
-    for(img of deals[country].dealsList){
-        let temp = new Image();
-        temp.setAttribute("src",img.img);
-        tempDiv.appendChild(temp);
+    for(image of deals[country].dealsList){
+        let temp = document.createElement("img");
+        temp.setAttribute("src",image.img);
     }
 }
-console.log(tempDiv);
-$(tempDiv).remove();
-
+//inicijalizacija dealsWrapper
 let dealsWrapper = document.createElement("div");
 dealsWrapper.setAttribute("id","dealsWrapper");
 dealsWrapper.classList.add("row");
