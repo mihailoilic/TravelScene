@@ -132,7 +132,7 @@ function mobileToggleClick(event){
         mobileToggle = true;
     }
 }
-//Slajder
+//Home - Slajder
 let slider = document.querySelector("#home");
 let imgIndex = 1;
 let sliderInterval = setInterval(nextImage, 4000);

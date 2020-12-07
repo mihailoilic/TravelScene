@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .primary-color {
   color: #fc5b62 !important;
 }
