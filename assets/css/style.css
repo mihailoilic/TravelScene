@@ -24,6 +24,10 @@ body {
   color: #fc5b62;
 }
 
+#navigation {
+  max-width: 100vw;
+}
+
 #navigation.navbar-fixed {
   padding: 25px 0;
 }
