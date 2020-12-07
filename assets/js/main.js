@@ -396,7 +396,7 @@ function openModal(dealObj,countryTitle){
     $("#modalLeftBody").html(`<p>${dealObj.description}</p>`);
 }
 function modalClose(event){
-    $(document.body).css("overflow", "visible");
+    $(document.body).removeAttr("style");
     $("#dealModal").removeClass("modalShow");
     event.stopPropagation();
 }
