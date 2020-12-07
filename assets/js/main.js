@@ -16,13 +16,17 @@ function navScrollEvent(){
         $("#navigation").addClass("navbar-fixed");
     }
     else {
-        $("#navigation").removeClass("navbar-fixed");
+        if(!($("#mobile_menu").hasClass("active"))){
+            $("#navigation").removeClass("navbar-fixed");
+        }
     }
-    let links = $("#navigation .header_right a");
+    let links = $("#main-menu a");
     $(links).removeClass("primary-color");
+    $("#mobile_menu a").removeClass("primary-color");
     for(let i = links.length - 1; i >= 0; i--){
         if($(window).scrollTop() >= elementTop($(links[i]).attr("href")) - 1){
             $(links[i]).addClass("primary-color");
+            $(`#mobile_menu a[href="${$(links[i]).attr("href")}"]`).addClass("primary-color");
             break;
         }
     }
@@ -68,32 +72,114 @@ let navigation = new Array(
         href: "#contact"
     }
 );
-let navWrapper = document.createElement("nav");
-navWrapper.setAttribute("id","main-menu");
-navWrapper.classList.add("ml-auto","d-none","d-lg-flex", "align-items-center");
-document.querySelectorAll("#navigation .header_right")[0].appendChild(navWrapper);
 let lista = document.createElement("ul");
-navWrapper.appendChild(lista);
+document.querySelector("#main-menu").appendChild(lista);
+let lista1 = document.createElement("ul");
+document.querySelector("#mobile_menu").appendChild(lista1);
 for (i in navigation){
     let navLi = document.createElement("li");
     navLi.classList.add("text-shadow");
     let navA = document.createElement("a");
     navA.setAttribute("href", navigation[i].href);
     navA.appendChild(document.createTextNode(navigation[i].title));
-    navA.addEventListener("click", function(event) {
-        event.preventDefault();
-        scrollTo($(this).attr("href"));
-        $(this).blur();
-    });
     if(navigation[i].type == "menu") {
         let arrow = document.createElement("span");
         arrow.classList.add("icofont-rounded-down");
         navA.appendChild(arrow);
     }
+    navA.addEventListener("click", function(event) {
+        event.preventDefault();
+        scrollTo($(this).attr("href"));
+        $(this).blur();
+    });
+    let navA1 = navA.cloneNode(true);
+    navA1.addEventListener("click", function(event) {
+        event.preventDefault();
+        scrollTo($(this).attr("href"));
+        $(this).blur();
+        mobileToggleClick(event);
+    });
     navLi.appendChild(navA);
     lista.appendChild(navLi);
+    let navLi1 = document.createElement("li");
+    navLi1.appendChild(navA1);
+    lista1.appendChild(navLi1);
 }
-
+let mobileToggle = false;
+$("#mobile-button").click(mobileToggleClick);
+function mobileToggleClick(event){
+    event.preventDefault();
+    if(mobileToggle) {
+        $("#mobile_menu").stop()
+            .slideUp()
+            .animate(
+                {"opacity": "0"},
+                {queue: false}
+                )
+            .removeClass("active");
+        navScrollEvent();
+        mobileToggle = false;
+    }
+    else {
+        $("#navigation").addClass("navbar-fixed");
+        $("#mobile_menu").stop()
+            .slideDown()
+            .animate(
+            {"opacity": "1"},
+            {queue: false}
+            )
+            .addClass("active");
+        mobileToggle = true;
+    }
+}
+//Slajder
+let slider = document.querySelector("#home");
+let imgIndex = 1;
+setInterval(nextImage, 4000);
+function nextImage(){
+    imgIndex++;
+    if(imgIndex > 3){
+        imgIndex = 1;
+    }
+    let nextImg = document.createElement("img");
+    slider.appendChild(nextImg);
+    nextImg.setAttribute("src",`assets/img/slider/${imgIndex}.jpg`);
+    nextImg.setAttribute("alt", `Slider Image ${imgIndex}`);
+    $(nextImg).hide();
+    let width = $(window).width();
+    $(nextImg).stop()
+        .css({"left": `${width}px`})
+        .fadeIn(200)
+        .animate({"left" : "0"}, {duration: 1000, queue: false, easing: "linear"});
+    setTimeout(function(){
+        $(nextImg).prev()
+        .stop()
+        .animate({"left": `-${width}px`}, 1500, "linear", function(){
+            $(this).remove();
+        });
+    }, 200);
+}
+function prevImage(){
+    imgIndex--;
+    if(imgIndex < 1){
+        imgIndex = 3;
+    }
+    let prevImg = document.createElement("img");
+    slider.appendChild(prevImg);
+    prevImg.setAttribute("src",`assets/img/slider/${imgIndex}.jpg`);
+    prevImg.setAttribute("alt", `Slider Image ${imgIndex}`);
+    $(prevImg).hide();
+    let width = $(window).width();
+    $(prevImg).css({"left": `-${width}px`})
+        .fadeIn(200)
+        .animate({"left" : "0"}, {duration: 1000, queue: false, easing: "linear"});
+    setTimeout(function(){
+        $(prevImg).prev()
+        .animate({"left": `${width}px`}, 1500, "linear", function(){
+            $(this).remove();
+        });
+    }, 200);
+}
 //Deals - dinamicki sadrzaj
 let deals = {
     "th": {
@@ -253,7 +339,6 @@ function createDealCountries(){
             createDeal(deals[country]);
         }
     },300);
-
 }
 function clearDealsWrapper(){
     $(dealsWrapper).css("min-height",`${$(dealsWrapper).height()}px`);

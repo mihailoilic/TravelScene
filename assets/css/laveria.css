@@ -2064,8 +2064,6 @@ img{
 	.footer-widget{
 		margin-bottom: 30px;
 	}
-}
-@media only screen and (max-width: 767px){
 	#main-menu{
 		display: none;
 		
@@ -2105,6 +2103,9 @@ img{
 	.slicknav_btn {
 		top: 9px;
 	}
+}
+@media only screen and (max-width: 767px){
+	
 	.why-choose-img {
 		margin-bottom: 40px;
 	}

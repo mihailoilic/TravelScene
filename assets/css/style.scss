@@ -19,8 +19,94 @@
 #navigation.navbar-fixed {
     padding: 25px 0;
 }
+#mobile-button {
+    position: absolute;
+    right: 15px;
+    span {
+        font-size: 2em;
+        color: #fff;
+    }
+}
+#mobile_menu {
+    display:none;
+    opacity: 0;
+    ul {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        z-index: 1000;
+        margin-top: 20px;
+        list-style-type: none;
+        li {
+            text-align: center;
+            margin: 5px;
+            ul {
+                padding: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.05);
+                a {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
 #main-menu {
     margin-top: 0px;
+}
+#home {
+    height: 100vh;
+    .hero-text {
+        h1 {
+            padding-left: 15%;
+            padding-right: 15%;
+            @media only screen and (max-width: 767px) {
+                font-size: 3em;
+            }
+            @media only screen and (max-width: 575px) {
+                font-size: 2em;
+            }
+        }
+    }
+    img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        filter: brightness(60%);
+        box-shadow: -20px -50px 100px rgba(0, 0, 0, .4);
+    }
+    #sliderPrev, #sliderNext{
+        position: absolute;
+        margin-bottom: 120px;
+        padding: 15px 15px 10px 15px;
+        background: rgba(0, 0, 0, .4);
+        span {
+            font-size: 2em;
+            color: #fff;
+        }
+        @media only screen and (max-width: 575px) {
+            padding: 10px 10px 5px 10px
+        }
+    }
+    #sliderPrev {
+        left: 50px;
+        @media only screen and (max-width: 575px) {
+            left: 10px;
+        }
+    }
+
+    #sliderNext {
+        right: 50px;
+        @media only screen and (max-width: 575px) {
+            right: 10px;
+        }
+    }
+
 }
 .single_package {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);

@@ -26,57 +26,39 @@
 		<div id="navigation" class="fixed-top navbar-light bg-faded site-navigation">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-2 col-md-3 col-sm-4 d-flex align-items-center">
+					<div class="col-8 col-lg-2 d-flex align-items-center">
 						<div class="site-logo">
 							<a href="index.html"><i class="fa fa-compass d-inline primary-color"></i>TRAVEL<span>SCENE</span></a>          				
 						</div>
 					</div><!--- END Col -->
-					
-					<div class="col-lg-10 col-md-9">
+					<div class="col-4 col-lg-10">
 						<div class="header_right">
-							<!-- <nav id="main-menu" class="ml-auto d-none d-lg-flex align-items-center">
-								<ul>
-								  <li  class="text-shadow"><a href="#home">Home</a></li>					  
-								  <li  class="text-shadow"><a href="#deals">Pick destination</a></li>
-								  <li  class="text-shadow"><a href="#special_package">Top deals <i class="icofont-rounded-down"></i></a>
-									<ul>
-										<li><a href="">DEAL 1</a></li>				
-									</ul>
-								  </li>
-								  <li  class="text-shadow"><a href="#why_choose">Why us</a></li>
-								  <li  class="text-shadow"><a href="#gallery">Gallery</a></li>
-								  <li  class="text-shadow"><a href="#contact">Contact</a></li>
-								</ul>
-							</nav>
-							<div id="mobile_menu"></div> -->
+							<nav id="main-menu" class="ml-auto d-none d-lg-flex align-items-center"></nav>
+							<a href="#" id="mobile-button" class="d-lg-none"><span class="fa fa-bars"></span></a>
 						</div>
 					</div><!--- END Col -->
 				</div><!--- END ROW -->
 			</div><!--- END CONTAINER -->
+			<div id="mobile_menu" class="d-lg-none"></div>
 		</div> 	  
 		<!-- END NAVBAR -->
 
 		<!-- START SLIDER -->
-		<section id="home" class="home-slider" >			
-			<div class="single_home_slide" style="background-image: url(assets/img/slider/1.jpg);  background-size:cover; background-position: center center;">
-				<div class="slide_overlay">
-					<div class="container">
-						<div class="row">
-						  <div class="col-md-12 text-center">
-							<div class="hero-text">
-								<h1 class="text-shadow">
-									We Will Plan Your Perfect Vacation
-								</h1>
-								<p>Your dream trip could be one just click away.</p>
-								<a href="#deals" class="btn btn-default btn-home-bg">Give us a try <i class="icofont-long-arrow-right"></i></a>						
-							</div>
-						  </div><!--- END COL -->			  
-						</div><!--- END ROW -->
-					</div><!--- END CONTAINER -->
-				</div><!--- END slide -->			
-			</div><!--- END slide -->			
-			
-			
+		<section id="home" class="home-slider d-flex align-items-center justify-content-center">
+			<div class="hero-text p-0 text-center">
+				<h1 class="text-shadow">
+					We Will Plan Your Perfect Vacation
+				</h1>
+				<p>Your dream trip could be one just click away.</p>
+				<a href="#deals" class="btn btn-default btn-home-bg">Give us a try <i class="icofont-long-arrow-right"></i></a>		
+			</div>
+			<a id="sliderPrev" href="#!" onClick="prevImage();" class="rounded-circle">
+				<span class="icofont-long-arrow-left"></span></a>
+			<a id="sliderNext" href="#!" onClick="nextImage();" class="rounded-circle">
+				<span class="icofont-long-arrow-right"></span>
+			</a>
+			<img id="slider-img" src="assets/img/slider/1.jpg" alt="Slider"/>
+		</section>			
 		<!-- END  SLIDER -->
 	
 		<!-- START DEALS & ORDER MODAL -->
