@@ -137,6 +137,7 @@ let slider = document.querySelector("#home");
 let imgIndex = 1;
 let sliderInterval = setInterval(nextImage, 4000);
 function nextImage(){
+    clearInterval(sliderInterval);
     imgIndex++;
     if(imgIndex > 3){
         imgIndex = 1;
@@ -161,11 +162,11 @@ function nextImage(){
     $("#sliderPrev, #sliderNext").fadeOut(100);
     setTimeout(function(){
         $("#sliderPrev, #sliderNext").fadeIn(100);
-    }, 1500);
-    clearInterval(sliderInterval);
+    }, 1100);
     sliderInterval = setInterval(nextImage, 4000);
 }
 function prevImage(){
+    clearInterval(sliderInterval);
     imgIndex--;
     if(imgIndex < 1){
         imgIndex = 3;
@@ -190,8 +191,7 @@ function prevImage(){
     $("#sliderPrev, #sliderNext").fadeOut(100);
     setTimeout(function(){
         $("#sliderPrev, #sliderNext").fadeIn(100);
-    }, 1500);
-    clearInterval(sliderInterval);
+    }, 1100);
     sliderInterval = setInterval(nextImage, 4000);
 }
 //Deals - dinamicki sadrzaj
