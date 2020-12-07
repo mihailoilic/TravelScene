@@ -135,7 +135,7 @@ function mobileToggleClick(event){
 //Slajder
 let slider = document.querySelector("#home");
 let imgIndex = 1;
-setInterval(nextImage, 4000);
+let sliderInterval = setInterval(nextImage, 4000);
 function nextImage(){
     imgIndex++;
     if(imgIndex > 3){
@@ -150,14 +150,20 @@ function nextImage(){
     $(nextImg).stop()
         .css({"left": `${width}px`})
         .fadeIn(200)
-        .animate({"left" : "0"}, {duration: 1000, queue: false, easing: "linear"});
+        .animate({"left" : "0"}, {duration: 700, queue: false, easing: "linear"});
     setTimeout(function(){
         $(nextImg).prev()
         .stop()
-        .animate({"left": `-${width}px`}, 1500, "linear", function(){
+        .animate({"left": `-${width}px`}, 1000, "linear", function(){
             $(this).remove();
         });
     }, 200);
+    $("#sliderPrev, #sliderNext").fadeOut(100);
+    setTimeout(function(){
+        $("#sliderPrev, #sliderNext").fadeIn(100);
+    }, 1500);
+    clearInterval(sliderInterval);
+    sliderInterval = setInterval(nextImage, 4000);
 }
 function prevImage(){
     imgIndex--;
@@ -170,15 +176,23 @@ function prevImage(){
     prevImg.setAttribute("alt", `Slider Image ${imgIndex}`);
     $(prevImg).hide();
     let width = $(window).width();
-    $(prevImg).css({"left": `-${width}px`})
+    $(prevImg).stop()
+        .css({"left": `-${width}px`})
         .fadeIn(200)
-        .animate({"left" : "0"}, {duration: 1000, queue: false, easing: "linear"});
+        .animate({"left" : "0"}, {duration: 700, queue: false, easing: "linear"});
     setTimeout(function(){
         $(prevImg).prev()
-        .animate({"left": `${width}px`}, 1500, "linear", function(){
+        .stop()
+        .animate({"left": `${width}px`}, 1000, "linear", function(){
             $(this).remove();
         });
     }, 200);
+    $("#sliderPrev, #sliderNext").fadeOut(100);
+    setTimeout(function(){
+        $("#sliderPrev, #sliderNext").fadeIn(100);
+    }, 1500);
+    clearInterval(sliderInterval);
+    sliderInterval = setInterval(nextImage, 4000);
 }
 //Deals - dinamicki sadrzaj
 let deals = {
