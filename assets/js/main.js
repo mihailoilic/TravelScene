@@ -133,6 +133,11 @@ function mobileToggleClick(event){
     }
 }
 //Home - Slajder
+//inicijalizacija slika za slajder
+for(let i = 1; i < 4; i++){
+    let temp = document.createElement("img");
+    temp.setAttribute("src",`assets/img/slider/${i}.jpg`);
+}
 let slider = document.querySelector("#home");
 let imgIndex = 1;
 let sliderInterval = setInterval(nextImage, 4000);
