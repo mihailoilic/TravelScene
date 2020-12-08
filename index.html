@@ -52,9 +52,9 @@
 				<p>Your dream trip could be one just click away.</p>
 				<a href="#deals" class="btn btn-default btn-home-bg">Give us a try <i class="icofont-long-arrow-right"></i></a>		
 			</div>
-			<a id="sliderPrev" href="#!" onClick="prevImage();" class="rounded-circle">
+			<a id="sliderPrev" href="#!" class="rounded-circle">
 				<span class="icofont-long-arrow-left"></span></a>
-			<a id="sliderNext" href="#!" onClick="nextImage();" class="rounded-circle">
+			<a id="sliderNext" href="#!" class="rounded-circle">
 				<span class="icofont-long-arrow-right"></span>
 			</a>
 			<img id="slider-img" src="assets/img/slider/1.jpg" alt="Slider"/>
@@ -79,22 +79,30 @@
 				  <div class="col-12 col-lg-5 col-xl-5">
 					<div class="book_now">
 						<h4>Tour Booking</h4>
-						<form id="bookForm" method="post">
+						<form id="bookForm" name="bookForm" method="post">
 							<div class="row">
 								<div class="form-group col-md-12">
 									<input type="text" name="fullName" class="form-control" id="full-name" placeholder="Full Name">
+									<p class="error-message m-0 text-white"></p>
+									<span class="error-icon icofont-warning"></span>
 								</div>
 								<div class="form-group col-md-12">
-									<input type="email" name="email" class="form-control" id="email" placeholder="Email">
+									<input type="text" name="email" class="form-control" id="email" placeholder="Email">
+									<p class="error-message m-0 text-white"></p>
+									<span class="error-icon icofont-warning"></span>
 								</div>
 								<div class="form-group col-md-12">
 									<input type="text" name="phone" class="form-control" id="phone" placeholder="Phone">
+									<p class="error-message m-0 text-white"></p>
+									<span class="error-icon icofont-warning"></span>
 								</div>
 								<div class="form-group col-md-12">
-									<input type="text" name="date" class="form-control" id="date" placeholder="Date" required="required">
+									<input type="text" name="date" class="form-control" id="date" placeholder="Date">
+									<p class="error-message m-0 text-white"></p>
+									<span class="error-icon icofont-warning"></span>
 								</div>
 								<div class="form-group col-md-12">
-									<select name="person" class="form-control" id="person">
+									<select name="people" class="form-control" id="people">
 										<option value="0">No of People</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -102,10 +110,13 @@
 										<option value="4">4</option>
 										<option value="5">5</option>
 									</select>
+									<p class="error-message m-0 text-white"></p>
+									<span class="error-icon icofont-warning"></span>
 								</div>
 								<div class="col-md-12">
 									<div class="actions">
-										<input type="submit" value="Submit" name="submit" class="book_now_btn"/>
+										<input id="tourBookingBtn" type="submit" value="Submit" name="submit" class="book_now_btn"/>
+										<p class="success-message mt-2 mb-0 text-white"><span class="icofont-checked"></span> Successful tour booking. We'll contact you soon!</p>
 									</div>
 								</div>
 							</div>
@@ -121,7 +132,7 @@
 
 
 		<!-- START DEALS -->
-		<section id="deals" class="container top_deals">
+		<section id="deals" class="container top_deals pt-5 mt-2 mt-md-5">
 				<div class="row mb-5">
 					<div class="col-md-12">
 						<div class="section-title text-center">
@@ -136,93 +147,45 @@
 		<!-- END DEALS -->	
 
 		<!-- START SPECIAL PACKAGE -->
-		<section id="special_package" class="special_package section-padding">
+		<section id="special_package" class="special_package section-padding pt-5 pb-3 mt-2 mt-md-5">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-12">
 						<div class="section-title text-center">
-							<span>Popular Tour Package</span>
-							<h2>The Best Of Our All <br> Tour Packages</h2>							
+							<span>Top Deals</span>
+							<h2>Don't miss your chance!</h2>							
 						</div>
 					</div><!-- END COL -->
 				</div><!-- END ROW -->		
-				
-				<div class="row text-left">
-					<div class="row col-md-12 justify-content-center">
-						<!-- <div id="package-slider"> -->
-							<div class="single_package col-12 col-md-5 p-0">
-								<a href="#">
-									<div class="pack_image">
-										<img class="img-fluid" src="assets/img/package/1.jpg" alt="">		
-										<span class="pack_price">$236</span>
-									</div>
-									<div class="package-hover">
-										<div class="tour-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>																					
-										<h5>Brazil Sea Beach</h5>
-										<div class="tour-locaton"><i class="icofont-location-pin"></i> Praia do Cassino Beach, Brazil</div>
-										<span class="time_zone">5 days - 4 night</span>
-										
-									</div>
-								</a>
-							</div><!-- END SINGLE PACKAGE -->
-							
-							<div class="single_package col-12 col-md-5 p-0">
-								<a href="#">
-									<div class="pack_image">
-										<img class="img-fluid" src="assets/img/package/2.jpg" alt="">		
-										<span class="pack_price">$236</span>
-									</div>
-									<div class="package-hover">
-										<div class="tour-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>																					
-										<h5>Brazil Sea Beach</h5>
-										<div class="tour-locaton"><i class="icofont-location-pin"></i> Praia do Cassino Beach, Brazil</div>
-										<span class="time_zone">5 days - 4 night</span>
-										
-									</div>
-								</a>
-							</div>
-						<!-- </div> -->
-					</div><!-- END COL -->
+				<div id="top-deals" class="row col-12 justify-content-center m-0">
 				</div><!-- END ROW -->
 			</div><!-- END CONTAINER -->
 		</section>
 		<!-- END SPECIAL PACKAGE -->
 		
 		<!-- START WHY CHOOSE US -->	
-		<section id="why_choose" class="why_choose">			
-			<div class="container">	
+		<section id="why_choose" class="why_choose pt-5 mt-2 mt-md-5">			
+			<div class="container">
+				<div class="section-title text-center why_title">
+					<span>Why Choose Us?</span>
+					<h2>Every Time We Provide best Service</h2>							
+				</div>	
 				<div class="row text-left align-items-center">
 					<div class="col-md-6">	
 						<div class="why-choose-img">
 							<img src="assets/img/why-choose-us/why-choose-us.jpg" alt="Big image">
-							<a href="#" class="video-btn"><i class="icofont-ui-play"></i></a>
 						</div>
 					</div>	
 					
 					<div class="col-md-6 pl-30">	
 						<div class="row">
 							<div class="col-md-12">
-								<div class="section-title text-left why_title">
-									<span>Why Choose Us?</span>
-									<h2>Every Time We Provide <br> best Service</h2>							
-								</div>
+								
 							</div><!-- END COL -->
 						</div><!-- END ROW -->	
 						
 						<div class="row">
-							<div class="col-lg-6 col-sm-6 col-xs-12">
+							<div class="col-lg-6 col-sm-12 col-xs-12">
 								<div class="single-choose mb-20">
 									<i class="icofont-man-in-glasses"></i>
 									<div class="choose-content">

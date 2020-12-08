@@ -63,8 +63,10 @@
     overflow: hidden;
     .hero-text {
         h1 {
-            padding-left: 15%;
-            padding-right: 15%;
+            @media only screen and (max-width: 1300px) {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
             @media only screen and (max-width: 767px) {
                 font-size: 3em;
             }
@@ -147,7 +149,28 @@
     span.icofont-close-line{
         font-size: 1.3em;
     }
-    #person option{
+    #people option{
         color: #000;
+    }
+}
+.error-message{
+    display: none;
+    font-size: 14px;
+    line-height: 15px;
+}
+.error-icon {
+    display: none;
+    position: absolute;
+    color: #fff;
+    left: -8px;
+    top: 10px;
+    font-size: 1.2em;
+}
+.success-message {
+    display: none;
+}
+.pack_image {
+    @media only screen and (min-width: 992px){
+        height: 350px;
     }
 }

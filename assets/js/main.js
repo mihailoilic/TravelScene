@@ -32,42 +32,37 @@ function navScrollEvent(){
     }
 }
 function scrollTo(elementId){
-    let scrollDistance = elementTop(elementId);
-    $("html").stop().animate({scrollTop:`${scrollDistance}px`}, 400);
+    let skrol = elementTop(elementId);
+    $("html").stop().animate({scrollTop:`${skrol}px`}, 400);
 }
 function elementTop(elementId){
-    let t = document.querySelector(elementId).getBoundingClientRect().top;
-    return  t + $(window).scrollTop();
+    let distanca = document.querySelector(elementId).getBoundingClientRect().top;
+    return  distanca + $(window).scrollTop();
 }
+
 //Dinamicko ucitavanje navigacije
 let navigation = new Array(
     {
-        type: "single",
         title: "Home",
         href: "#home"
     },
     {
-        type: "single",
         title: "Pick destination",
         href: "#deals"
     },
     {
-        type: "menu",
         title: "Top deals",
         href: "#special_package"
     },
     {
-        type: "single",
         title: "Why us",
         href: "#why_choose"
     },
     {
-        type: "single",
         title: "Gallery",
         href: "#gallery"
     },
     {
-        type: "single",
         title: "Contact",
         href: "#contact"
     }
@@ -82,11 +77,6 @@ for (i in navigation){
     let navA = document.createElement("a");
     navA.setAttribute("href", navigation[i].href);
     navA.appendChild(document.createTextNode(navigation[i].title));
-    if(navigation[i].type == "menu") {
-        let arrow = document.createElement("span");
-        arrow.classList.add("icofont-rounded-down");
-        navA.appendChild(arrow);
-    }
     navA.addEventListener("click", function(event) {
         event.preventDefault();
         scrollTo($(this).attr("href"));
@@ -105,11 +95,10 @@ for (i in navigation){
     navLi1.appendChild(navA1);
     lista1.appendChild(navLi1);
 }
-let mobileToggle = false;
 $("#mobile-button").click(mobileToggleClick);
 function mobileToggleClick(event){
     event.preventDefault();
-    if(mobileToggle) {
+    if($("#mobile_menu").is(":visible")) {
         $("#mobile_menu").stop()
             .slideUp()
             .animate(
@@ -118,7 +107,6 @@ function mobileToggleClick(event){
                 )
             .removeClass("active");
         navScrollEvent();
-        mobileToggle = false;
     }
     else {
         $("#navigation").addClass("navbar-fixed");
@@ -129,20 +117,44 @@ function mobileToggleClick(event){
             {queue: false}
             )
             .addClass("active");
-        mobileToggle = true;
     }
 }
+
 //Home - Slajder
 //inicijalizacija slika za slajder
 for(let i = 1; i < 4; i++){
     let temp = document.createElement("img");
     temp.setAttribute("src",`assets/img/slider/${i}.jpg`);
 }
+
 let slider = document.querySelector("#home");
 let imgIndex = 1;
-let sliderInterval = setInterval(nextImage, 4000);
-function nextImage(){
+let sliderInterval;
+$(window).on("load", function(){
+    sliderInterval = setInterval(nextImage, 5000);
+});
+$("#sliderPrev").click(function(event){
+    sliderClick("prev", event);
+});
+$("#sliderNext").click(function(event){
+    sliderClick("next", event);
+});
+function sliderClick(direction, event){
+    event.preventDefault();
     clearInterval(sliderInterval);
+    if(direction == "next"){
+        nextImage();
+    }
+    else {
+        prevImage();
+    }
+    $("#sliderPrev, #sliderNext").fadeOut(100);
+    setTimeout(function(){
+        $("#sliderPrev, #sliderNext").fadeIn(100);
+    }, 1100);
+    sliderInterval = setInterval(nextImage, 5000);
+}
+function nextImage(){
     imgIndex++;
     if(imgIndex > 3){
         imgIndex = 1;
@@ -164,14 +176,8 @@ function nextImage(){
             $(this).remove();
         });
     }, 200);
-    $("#sliderPrev, #sliderNext").fadeOut(100);
-    setTimeout(function(){
-        $("#sliderPrev, #sliderNext").fadeIn(100);
-    }, 1100);
-    sliderInterval = setInterval(nextImage, 4000);
 }
 function prevImage(){
-    clearInterval(sliderInterval);
     imgIndex--;
     if(imgIndex < 1){
         imgIndex = 3;
@@ -193,12 +199,8 @@ function prevImage(){
             $(this).remove();
         });
     }, 200);
-    $("#sliderPrev, #sliderNext").fadeOut(100);
-    setTimeout(function(){
-        $("#sliderPrev, #sliderNext").fadeIn(100);
-    }, 1100);
-    sliderInterval = setInterval(nextImage, 4000);
 }
+
 //Deals - dinamicki sadrzaj
 let deals = {
     "th": {
@@ -396,12 +398,182 @@ function openModal(dealObj,countryTitle){
     $("#modalLeftBody").html(`<p>${dealObj.description}</p>`);
 }
 function modalClose(event){
+    event.stopPropagation();
     $(document.body).removeAttr("style");
     $("#dealModal").removeClass("modalShow");
-    event.stopPropagation();
+    document.bookForm.reset();
+    $(".error-message").hide();
+    $(".error-icon").hide();
+    $("#tourBookingBtn").next().hide();
 }
 function stopPropagation(event){
     event.stopPropagation();
 }
-//MODAL FORM VALIDACIJA
+
+//Modal forma validacija
+$("#bookForm").on("submit", function(event){
+    event.preventDefault();
+    let forma = document.bookForm;
+    $(".error-message").hide();
+    $(".error-icon").hide();
+    $("#tourBookingBtn").next().hide();
+    let error = false;
+    let nameExp = /^\p{Uppercase_Letter}\p{Letter}{1,14}(\s\p{Uppercase_Letter}\p{Letter}{1,14}){1,3}$/u;
+    if(forma.fullName.value.length <= 40){
+        if(!nameExp.test(forma.fullName.value)){
+            $(forma.fullName).next()
+                .text("Invalid name. Words must begin with a capital letter.")
+                .fadeIn()
+                .next()
+                .fadeIn();
+            error = true;
+        }
+    }
+    else {
+        $(forma.fullName).next()
+        .text("Full name can't be more than 40 characters long.")
+        .fadeIn()
+        .next()
+        .fadeIn();
+        error = true;
+    }
+    let emailExp = /^[a-z]((\.|-)?[a-z0-9]){2,}@[a-z]((\.|-)?[a-z0-9]+){2,}\.[a-z]{2,6}$/;
+    if(forma.email.value.length <= 50){
+        if(!emailExp.test(forma.email.value)){
+            $(forma.email).next()
+                .text("Invalid email address. Use only lowercase letters and symbols .-@")
+                .fadeIn()
+                .next()
+                .fadeIn();
+            error = true;
+        }
+    }
+    else {
+        $(forma.email).next()
+            .text("Email can't be more than 50 characters long.")
+            .fadeIn()
+            .next()
+            .fadeIn();
+        error = true;
+    }
+    let phoneExp = /^(\+\d{1,3})(\s?\d){8,}$/;
+    if(forma.phone.value.length <= 20){
+        if(!phoneExp.test(forma.phone.value)){
+            $(forma.phone).next()
+                .text("Invalid phone number. Use symbol +, space and numbers. (e.g. +381 60 123456).")
+                .fadeIn()
+                .next()
+                .fadeIn();
+            error = true;
+        }
+    }
+    else {
+        $(forma.phone).next()
+        .text("Phone number can't be more than 20 digits and spaces long.")
+        .fadeIn()
+        .next()
+        .fadeIn();
+        error = true;
+    }
+    let dateExp = /^((0?[1-9]|[12]\d|3[01])\.(0?[1-9]|1[012])\.(19\d\d|20([01]\d|2[01]))\.|(19\d\d|20([01]\d|2[01]))-(0?[1-9]|1[012])-(0?[1-9]|[12]\d|3[01]))$/;
+    if(dateExp.test(forma.date.value)){
+        let proslo = false;
+        if(forma.date.value.indexOf(".") != -1){
+            let datumString = forma.date.value.substring(0,forma.date.value.length-1);
+            let datumNiz = datumString.split(".");
+            let unetDatum = new Date();
+            unetDatum.setDate(Number(datumNiz[0]));
+            unetDatum.setMonth(Number(datumNiz[1])-1);
+            unetDatum.setFullYear(Number(datumNiz[2]));
+            let datumSada = new Date();
+            if (unetDatum < datumSada){
+                proslo = true;
+            }
+        }
+        else {
+            let datumNiz = forma.date.value.split("-");
+            let unetDatum = new Date();
+            unetDatum.setDate(Number(datumNiz[2]));
+            unetDatum.setMonth(Number(datumNiz[1])-1);
+            unetDatum.setFullYear(Number(datumNiz[0]));
+            let datumSada = new Date();
+            if (unetDatum < datumSada){
+                proslo = true;
+            }
+        }
+        if(proslo){
+            $(forma.date).next()
+            .text("You can't book tour on a date that has already passed.")
+            .fadeIn()
+            .next()
+            .fadeIn();
+            error = true;
+        }
+    }
+    else {
+        $(forma.date).next()
+        .text("Please enter a valid date. Allowed formats are DD.MM.YYYY. and YYYY-MM-DD")
+        .fadeIn()
+        .next()
+        .fadeIn();
+        error = true;
+    }
+    if(forma.people.options.selectedIndex == 0){
+        $(forma.people).next()
+        .text("Please select number of people.")
+        .fadeIn()
+        .next()
+        .fadeIn();
+        error = true;
+    }
+    if(!error){
+        $("#tourBookingBtn").next()
+            .fadeIn();
+    }
+});
+
+//Top deals - dinamicko ispisivanje
+let topDeals = ["ph0", "th1"];
+for(deal of topDeals){
+    let country = deal.match(/[a-z]+/)[0];
+    let indeks = Number(deal.match(/\d+/)[0]);
+    createTopDeal(deals[country].dealsList[indeks], deals[country].title);
+}
+function createTopDeal(dealObj, countryTitle){
+    let kontejner = document.querySelector("#top-deals");
+    let topDeal = document.createElement("div");
+    topDeal.classList.add("single_package", "col-12", "col-md-5", "p-0");
+    kontejner.appendChild(topDeal);
+    let topDealLink = document.createElement("a");
+    topDealLink.setAttribute("href","#!");
+    $(topDealLink).click(function(event){
+        event.preventDefault();
+        openModal(dealObj, countryTitle);
+    });
+    topDeal.appendChild(topDealLink);
+    let htmlSadrzaj = `<div class="pack_image">
+            <img class="img-fluid" src="${dealObj.img}" alt="${dealObj.title}"/>
+            <span class="pack_price">$${dealObj.price.toLocaleString()}</span></div>
+        <div class="package-hover">
+            <div class="tour-rating">`;
+    for(let i = 0; i < dealObj.stars; i++){
+        htmlSadrzaj += `<span class="fa fa-star"></span>`;
+    }
+    for(let i = 0; i < 5 - dealObj.stars; i++){
+        htmlSadrzaj += `<span class="fa fa-star text-black-20"></span>`;
+    }
+    htmlSadrzaj += `</div><h5>${dealObj.title}</h5>
+            <div class="tour-locaton">
+            <i class="icofont-location-pin"></i>${countryTitle}</div>
+            <span class="time_zone"></span></div>`;
+    topDealLink.innerHTML = htmlSadrzaj;
+    setInterval(function(){
+        let datum = new Date();
+        let sati = 23 - datum.getHours();
+        let minuti = 59 - datum.getMinutes();
+        let sekunde = 59 -datum.getSeconds();
+        $(".time_zone").text(`Expires in ${sati < 10 ? "0" + sati : sati}:${minuti < 10 ? "0" + minuti : minuti}:${sekunde < 10 ? "0" + sekunde : sekunde}`);
+    }, 1000);
+}
+
 
