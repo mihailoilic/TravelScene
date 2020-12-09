@@ -229,4 +229,24 @@
     height: 350px;
   }
 }
+
+#why_choose {
+  opacity: 0;
+  overflow: hidden;
+}
+
+#statistics {
+  margin-top: 100px;
+}
+
+.contact .form-control {
+  margin-bottom: 0px;
+}
+
+.contact .word-count {
+  position: absolute;
+  font-size: 12px;
+  top: 5px;
+  right: 40px;
+}
 /*# sourceMappingURL=style.css.map */

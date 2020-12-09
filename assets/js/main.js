@@ -3,6 +3,7 @@ $(document).ready(function() {
     $(window).on("load",function() {
         $(".preloader").fadeOut();
         navScrollEvent();
+        loadStatistics();
     });
     $(this).scroll(navScrollEvent);
     $("#home .hero-text a").click(function(event){
@@ -16,7 +17,7 @@ function navScrollEvent(){
         $("#navigation").addClass("navbar-fixed");
     }
     else {
-        if(!($("#mobile_menu").hasClass("active"))){
+        if(!$("#mobile_menu").hasClass("active")){
             $("#navigation").removeClass("navbar-fixed");
         }
     }
@@ -401,78 +402,76 @@ function modalClose(event){
     event.stopPropagation();
     $(document.body).removeAttr("style");
     $("#dealModal").removeClass("modalShow");
+    clearFormErrors();
     document.bookForm.reset();
-    $(".error-message").hide();
-    $(".error-icon").hide();
-    $("#tourBookingBtn").next().hide();
 }
 function stopPropagation(event){
     event.stopPropagation();
 }
 
+//Validacija forme globalno
+function clearFormErrors(){
+    $(".error-message").hide();
+    $(".error-icon").hide();
+    $(".success-message").hide();
+}
+function formError(formElement, message){
+    $(formElement).next()
+            .text(message)
+            .fadeIn()
+            .next()
+            .fadeIn();
+}
+
 //Modal forma validacija
 $("#bookForm").on("submit", function(event){
     event.preventDefault();
+    clearFormErrors();
     let forma = document.bookForm;
-    $(".error-message").hide();
-    $(".error-icon").hide();
-    $("#tourBookingBtn").next().hide();
     let error = false;
     let nameExp = /^\p{Uppercase_Letter}\p{Letter}{1,14}(\s\p{Uppercase_Letter}\p{Letter}{1,14}){1,3}$/u;
     if(forma.fullName.value.length <= 40){
-        if(!nameExp.test(forma.fullName.value)){
-            $(forma.fullName).next()
-                .text("Invalid name. Words must begin with a capital letter.")
-                .fadeIn()
-                .next()
-                .fadeIn();
+        if(forma.fullName.value == "") {
+            formError(forma.fullName, "Please input your full name.");
+            error = true;
+        }
+        else if(!nameExp.test(forma.fullName.value)){
+            formError(forma.fullName, "Please input a valid name. All words must begin with a capital letter.");
             error = true;
         }
     }
     else {
-        $(forma.fullName).next()
-        .text("Full name can't be more than 40 characters long.")
-        .fadeIn()
-        .next()
-        .fadeIn();
+        formError(forma.fullName, "Full name can't be more than 40 characters long.");
         error = true;
     }
     let emailExp = /^[a-z]((\.|-)?[a-z0-9]){2,}@[a-z]((\.|-)?[a-z0-9]+){2,}\.[a-z]{2,6}$/;
     if(forma.email.value.length <= 50){
-        if(!emailExp.test(forma.email.value)){
-            $(forma.email).next()
-                .text("Invalid email address. Use only lowercase letters and symbols .-@")
-                .fadeIn()
-                .next()
-                .fadeIn();
+        if(forma.email.value == "") {
+            formError(forma.email, "Please input your email address.");
+            error = true;
+        }
+        else if(!emailExp.test(forma.email.value)){
+            formError(forma.email, "Invalid email address. Use only lowercase letters and symbols .-@");
             error = true;
         }
     }
     else {
-        $(forma.email).next()
-            .text("Email can't be more than 50 characters long.")
-            .fadeIn()
-            .next()
-            .fadeIn();
+        formError(forma.email, "Email can't be more than 50 characters long.");
         error = true;
     }
-    let phoneExp = /^(\+\d{1,3})(\s?\d){8,}$/;
+    let phoneExp = /^\+\d{1,3}(\s?\d){8,}$/;
     if(forma.phone.value.length <= 20){
-        if(!phoneExp.test(forma.phone.value)){
-            $(forma.phone).next()
-                .text("Invalid phone number. Use symbol +, space and numbers. (e.g. +381 60 123456).")
-                .fadeIn()
-                .next()
-                .fadeIn();
+        if(forma.phone.value == "") {
+            formError(forma.phone, "Please input your phone number.");
+            error = true;
+        }
+        else if(!phoneExp.test(forma.phone.value)){
+            formError(forma.phone, "Invalid phone number. Use symbol +, space and numbers. (e.g. +381 60 123456).");
             error = true;
         }
     }
     else {
-        $(forma.phone).next()
-        .text("Phone number can't be more than 20 digits and spaces long.")
-        .fadeIn()
-        .next()
-        .fadeIn();
+        formError(forma.phone, "Phone number can't be more than 20 digits and spaces long.");
         error = true;
     }
     let dateExp = /^((0?[1-9]|[12]\d|3[01])\.(0?[1-9]|1[012])\.(19\d\d|20([01]\d|2[01]))\.|(19\d\d|20([01]\d|2[01]))-(0?[1-9]|1[012])-(0?[1-9]|[12]\d|3[01]))$/;
@@ -502,33 +501,27 @@ $("#bookForm").on("submit", function(event){
             }
         }
         if(proslo){
-            $(forma.date).next()
-            .text("You can't book tour on a date that has already passed.")
-            .fadeIn()
-            .next()
-            .fadeIn();
+            formError(forma.date, "You can't book tour on a date that has already passed.");
             error = true;
         }
     }
     else {
-        $(forma.date).next()
-        .text("Please enter a valid date. Allowed formats are DD.MM.YYYY. and YYYY-MM-DD")
-        .fadeIn()
-        .next()
-        .fadeIn();
+        if(forma.date.value == "") {
+            formError(forma.date, "Please input date.");
+        }
+        else{
+            formError(forma.date, "Please enter a valid date. Allowed formats are DD.MM.YYYY. and YYYY-MM-DD");
+        }
         error = true;
     }
     if(forma.people.options.selectedIndex == 0){
-        $(forma.people).next()
-        .text("Please select number of people.")
-        .fadeIn()
-        .next()
-        .fadeIn();
+        formError(forma.people, "Please select number of people.");
         error = true;
     }
     if(!error){
         $("#tourBookingBtn").next()
             .fadeIn();
+        forma.reset();
     }
 });
 
@@ -576,4 +569,168 @@ function createTopDeal(dealObj, countryTitle){
     }, 1000);
 }
 
+//Why choose us - skrol animacija
+$(document).ready(function(){
+    $("#why-wrapper").children()
+        .first()
+        .css("left","-150px")
+        .next()
+        .css("right","-150px");
+    let x = false;
+    $(this).scroll(function(){
+        let sectionDistanca = elementTop("#why_choose");
+        if($(this).scrollTop() > sectionDistanca - 600 && $(this).scrollTop() < sectionDistanca + $("#why_choose").height() - 200){
+            if(!x){
+                $("#why_choose").stop()
+                .animate({"opacity":"1"}, 750);
+                $("#why-wrapper").children()
+                    .first()
+                    .stop()
+                    .animate({"left":"0px"}, 500)
+                    .next()
+                    .stop()
+                    .animate({"right":"0px"}, 500);
+                x=true;
+            }
+        }
+        else {
+            if(x){
+                $("#why_choose").stop()
+                .animate({"opacity":"0"}, 750);
+                $("#why-wrapper").children()
+                    .first()
+                    .stop()
+                    .animate({"left":"-150px"}, 500)
+                    .next()
+                    .stop()
+                    .animate({"right":"-150px"}, 500);
+                x=false;
+            }
+        }
+    });
+});
 
+//Galerija
+
+
+//Statistika firme
+let statistika = [32652, 1821, 5660, 11859];
+function loadStatistics(){
+    let sectionDistanca = elementTop("#statistics");
+    let prviPut = true;
+    $(this).scroll(function(){
+        if($(this).scrollTop() > sectionDistanca - 200 && $(this).scrollTop() < sectionDistanca + $("#statistics").height()){
+            if(prviPut){
+                let ispis = document.querySelectorAll(".counter-num");
+                let trenutno = [0, 0, 0, 0];
+                let gotovo = 0;
+                let statsInterval = setInterval(function(){
+                    for(i in trenutno){
+                        if(trenutno[i]<statistika[i]){
+                            if(statistika[i]-trenutno[i]<10){
+                                trenutno[i] = statistika[i];
+                                gotovo++;
+                            }
+                            else if(statistika[i]-trenutno[i]<100){
+                                trenutno[i] += 5;
+                            }
+                            else if(statistika[i]-trenutno[i]<500){
+                                trenutno[i] += 44;
+                            }
+                            else if(statistika[i]-trenutno[i]<1000){
+                                trenutno[i] += 71;
+                            }
+                            else if(statistika[i]-trenutno[i]<5000){
+                                trenutno[i] += 453;
+                            }
+                            else if(statistika[i]-trenutno[i]<10000){
+                                trenutno[i] += 852;
+                            }
+                            else {
+                                trenutno[i] += 9857;
+                            }
+                            ispis[i].textContent = String(trenutno[i]);
+                        }
+                    }
+                    if(gotovo == 4) clearInterval(statsInterval);
+                },50);
+                prviPut = false;
+            }
+        }
+    });
+}
+
+//Utisci - dinamicki sadrzaj
+
+
+//Contact forma validacija
+let textarea = document.contactForm.message;
+$(textarea).on("keyup", function(){
+    if(textarea.value.length >= 200){
+        $(".word-count").addClass("primary-color");
+        textarea.value = textarea.value.substring(0,200);
+    }
+    else {
+        $(".word-count").removeClass("primary-color");
+    }
+    $(".word-count").text(String(200-textarea.value.length));
+});
+$(document.contactForm).on("submit", function(event){
+    event.preventDefault();
+    clearFormErrors();
+    let forma = document.contactForm;
+    let error = false;
+    let nameExp = /^\p{Uppercase_Letter}\p{Letter}{1,14}(\s\p{Uppercase_Letter}\p{Letter}{1,14}){0,2}$/u;
+    if(forma.name.value.length <= 30){
+        if(forma.name.value == "") {
+            formError(forma.name, "Please input your name.");
+            error = true;
+        }
+        else if(!nameExp.test(forma.name.value)){
+            formError(forma.name, "Please input a valid name. All words must begin with a capital letter.");
+            error = true;
+        }
+    }
+    else {
+        formError(forma.name, "Name can't be more than 30 characters long.");
+        error = true;
+    }
+    let emailExp = /^[a-z]((\.|-)?[a-z0-9]){2,}@[a-z]((\.|-)?[a-z0-9]+){2,}\.[a-z]{2,6}$/;
+    if(forma.email.value.length <= 50){
+        if(forma.email.value == "") {
+            formError(forma.email, "Please input your email address.");
+            error = true;
+        }
+        else if(!emailExp.test(forma.email.value)){
+            formError(forma.email, "Invalid email address. Use only lowercase letters and symbols .-@");
+            error = true;
+        }
+    }
+    else {
+        formError(forma.email, "Email can't be more than 50 characters long.");
+        error = true;
+    }
+    if(forma.subject.value.length <= 30){
+        if(forma.subject.value == "") {
+            formError(forma.subject, "Please provide subject of your question.");
+            error = true;
+        }
+    }
+    else {
+        formError(forma.subject, "Subject can't be more than 30 characters long.");
+        error = true;
+    }
+    if(forma.message.value == "") {
+        formError(forma.message, "Please write a message.");
+        error = true;
+    }
+    else if(forma.message.value.length <= 20) {
+        formError(forma.message, "Message is too short. Minimum characters: 20.");
+        error = true;
+    }
+    if(!error){
+        $("#submitButton").next()
+            .fadeIn();
+        forma.reset();
+    }
+});
