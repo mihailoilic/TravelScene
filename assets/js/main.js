@@ -3,7 +3,7 @@ $(document).ready(function() {
     $(window).on("load",function() {
         $(".preloader").fadeOut();
         navScrollEvent();
-        loadStatistics();
+        statsAnimation();
     });
     $(this).scroll(navScrollEvent);
     $("#home .hero-text a").click(function(event){
@@ -66,35 +66,40 @@ let navigation = new Array(
     {
         title: "Contact",
         href: "#contact"
+    },
+    {
+        title: "Author",
+        href: "#author"
     }
 );
-let lista = document.createElement("ul");
-document.querySelector("#main-menu").appendChild(lista);
-let lista1 = document.createElement("ul");
-document.querySelector("#mobile_menu").appendChild(lista1);
+let navLista = document.createElement("ul");
+document.querySelector("#main-menu").appendChild(navLista);
+let mobileLista = document.createElement("ul");
+document.querySelector("#mobile_menu").appendChild(mobileLista);
 for (i in navigation){
     let navLi = document.createElement("li");
     navLi.classList.add("text-shadow");
     let navA = document.createElement("a");
     navA.setAttribute("href", navigation[i].href);
     navA.appendChild(document.createTextNode(navigation[i].title));
+    let navA1 = navA.cloneNode(true);
+    navLi.appendChild(navA);
+    navLista.appendChild(navLi);
+    let navLi1 = document.createElement("li");
+    navLi1.appendChild(navA1);
+    mobileLista.appendChild(navLi1);
     navA.addEventListener("click", function(event) {
         event.preventDefault();
         scrollTo($(this).attr("href"));
         $(this).blur();
     });
-    let navA1 = navA.cloneNode(true);
     navA1.addEventListener("click", function(event) {
+        console.log("dfdfswdfasdvfas");
         event.preventDefault();
         scrollTo($(this).attr("href"));
         $(this).blur();
         mobileToggleClick(event);
     });
-    navLi.appendChild(navA);
-    lista.appendChild(navLi);
-    let navLi1 = document.createElement("li");
-    navLi1.appendChild(navA1);
-    lista1.appendChild(navLi1);
 }
 $("#mobile-button").click(mobileToggleClick);
 function mobileToggleClick(event){
@@ -436,7 +441,7 @@ $("#bookForm").on("submit", function(event){
             error = true;
         }
         else if(!nameExp.test(forma.fullName.value)){
-            formError(forma.fullName, "Please input a valid name. All words must begin with a capital letter.");
+            formError(forma.fullName, "Please input a valid full name. All words must begin with a capital letter.");
             error = true;
         }
     }
@@ -510,7 +515,7 @@ $("#bookForm").on("submit", function(event){
             formError(forma.date, "Please input date.");
         }
         else{
-            formError(forma.date, "Please enter a valid date. Allowed formats are DD.MM.YYYY. and YYYY-MM-DD");
+            formError(forma.date, "Please enter a valid date a year from now. Allowed formats are DD.MM.YYYY. and YYYY-MM-DD");
         }
         error = true;
     }
@@ -573,9 +578,9 @@ function createTopDeal(dealObj, countryTitle){
 $(document).ready(function(){
     $("#why-wrapper").children()
         .first()
-        .css("left","-150px")
+        .css("left","-100px")
         .next()
-        .css("right","-150px");
+        .css("right","-100px");
     let x = false;
     $(this).scroll(function(){
         let sectionDistanca = elementTop("#why_choose");
@@ -600,10 +605,10 @@ $(document).ready(function(){
                 $("#why-wrapper").children()
                     .first()
                     .stop()
-                    .animate({"left":"-150px"}, 500)
+                    .animate({"left":"-100px"}, 500)
                     .next()
                     .stop()
-                    .animate({"right":"-150px"}, 500);
+                    .animate({"right":"-100px"}, 500);
                 x=false;
             }
         }
@@ -613,37 +618,45 @@ $(document).ready(function(){
 //Galerija
 
 
-//Statistika firme
-let statistika = [32652, 1821, 5660, 11859];
-function loadStatistics(){
-    let sectionDistanca = elementTop("#statistics");
+//Statistika firme - dinamicki sadrzaj
+let statistika = ["32652|Happy Customers|icofont-users-alt-3", "1821|Amazing Tours|icofont-airplane", "5660|In Business|icofont-handshake-deal", "11859|Support Cases|icofont-live-support"];
+let statsHtml = "";
+for(i in statistika){
+    statsHtml += `<div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="single-counter"><i class="${statistika[i].match(/icofont-[a-z\d-]+/)[0]}"></i>
+                        <div class="counter-content">
+                            <h2 class="counter-num">${parseInt(statistika[i])}</h2>
+                            <p>${statistika[i].match(/[A-z\s]+/)[0]}<span></span></p>
+                        </div></div></div>`;
+}
+$("#statisticsWrapper").html(statsHtml);
+function statsAnimation(){
     let prviPut = true;
     $(this).scroll(function(){
-        if($(this).scrollTop() > sectionDistanca - 200 && $(this).scrollTop() < sectionDistanca + $("#statistics").height()){
+        let sectionDistanca = elementTop("#statistics");
+        if($(this).scrollTop() > sectionDistanca - 250 && $(this).scrollTop() < sectionDistanca + $("#statistics").height()){
             if(prviPut){
                 let ispis = document.querySelectorAll(".counter-num");
                 let trenutno = [0, 0, 0, 0];
                 let gotovo = 0;
                 let statsInterval = setInterval(function(){
                     for(i in trenutno){
-                        if(trenutno[i]<statistika[i]){
-                            if(statistika[i]-trenutno[i]<10){
-                                trenutno[i] = statistika[i];
+                        let statsBroj = parseInt(statistika[i]);
+                        if(trenutno[i]<statsBroj){
+                            if(statsBroj-trenutno[i]<50){
+                                trenutno[i] = statsBroj;
                                 gotovo++;
                             }
-                            else if(statistika[i]-trenutno[i]<100){
-                                trenutno[i] += 5;
+                            else if(statsBroj-trenutno[i]<100){
+                                trenutno[i] += 7;
                             }
-                            else if(statistika[i]-trenutno[i]<500){
-                                trenutno[i] += 44;
+                            else if(statsBroj-trenutno[i]<500){
+                                trenutno[i] += 39;
                             }
-                            else if(statistika[i]-trenutno[i]<1000){
-                                trenutno[i] += 71;
+                            else if(statsBroj-trenutno[i]<5000){
+                                trenutno[i] += 253;
                             }
-                            else if(statistika[i]-trenutno[i]<5000){
-                                trenutno[i] += 453;
-                            }
-                            else if(statistika[i]-trenutno[i]<10000){
+                            else if(statsBroj-trenutno[i]<10000){
                                 trenutno[i] += 852;
                             }
                             else {
@@ -653,9 +666,12 @@ function loadStatistics(){
                         }
                     }
                     if(gotovo == 4) clearInterval(statsInterval);
-                },50);
+                },30);
                 prviPut = false;
             }
+        }
+        else {
+            prviPut =  true;
         }
     });
 }
