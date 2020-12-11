@@ -41,7 +41,7 @@ function elementTop(elementId){
     return  distanca + $(window).scrollTop();
 }
 
-//Dinamicko ucitavanje navigacije
+//Navigacija - dinamicko ucitavanje
 let navigation = new Array(
     {
         title: "Home",
@@ -481,7 +481,7 @@ $("#bookForm").on("submit", function(event){
             error = true;
         }
         else if(!phoneExp.test(forma.phone.value)){
-            formError(forma.phone, "Invalid phone number. Use symbol +, space and numbers. (e.g. +381 60 123456).");
+            formError(forma.phone, "Invalid phone number. Use symbol + and numbers. You can separate with space. (e.g. +381 60 123456)");
             error = true;
         }
     }
@@ -695,8 +695,150 @@ $(document).ready(function(){
     });
 });
 
-//Utisci - dinamicki sadrzaj
-
+//Utisci - dinamicki sadrzaj i slajder
+let utisci = new Array(
+    {
+        name: "Jessica",
+        review: "Meeting the Professional Travel Team really made a huge impression on me of how helpful, warm, and fun you all are.",
+        img: "assets/img/review/1.png"
+    },
+    {
+        name: "Dylan",
+        review: "I want to express my appreciation for your agents. They are such a joy to work with and always so pleasant on the phone.",
+        img: "assets/img/review/2.png"
+    },
+    {
+        name: "Courtney",
+        review: "Every time I reach out for help with my travel needs for the VPs, your team does an excellent job!",
+        img: "assets/img/review/1.png"
+    },
+    {
+        name: "Luke",
+        review: "It was hectic and last minute, but your responsiveness and adaptability was greatly appreciated through the entire process.",
+        img: "assets/img/review/3.png"
+    },
+    {
+        name: "Kevin",
+        review: "I wanted to take a moment to sing the praises of one of your representatives — each encounter that I have had has been one of pure joy!",
+        img: "assets/img/review/2.png"
+    }
+);
+let utisciHtml = "";
+for(i in utisci){
+    utisciHtml += `<div class="single-testimonial col-12">
+    <div class="testimonial-content">${utisci[i].review}</div>
+    <div class="testimonial-bottom"><img src="${utisci[i].img}" alt="review image">
+        <h3 class="title">${utisci[i].name}</h3><div class="test-rating">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <i class="icofont-star"></i>
+                    <i class="icofont-star"></i>
+                    <i class="icofont-star"></i>
+                    <i class="icofont-star"></i>
+                    <i class="icofont-star"></i>			
+                </li></ul></div></div></div>`
+}
+$("#testimonial-slider").html(utisciHtml);
+//Inicijalizacija slajdera
+$("#testimonial-slider .single-testimonial")
+    .first()
+    .css("opacity","1")
+    .show();
+utisakStrelice();
+$("#tPrev").click(function(event){
+    event.preventDefault();
+    utisakPrev();
+});
+$("#tNext").click(function(event){
+    event.preventDefault();
+    utisakNext();
+});
+let utisciTajmer;
+function utisakNext(){
+    let utisak = $("#testimonial-slider .single-testimonial:visible");
+    utisak.animate(
+        {
+            "left":`-${utisak.width()}px`,
+            "opacity" : "0"
+        },
+        {
+            duration: 500,
+            queue : false,
+            complete : function(){
+                $(this).hide();
+            }
+        })
+        .next()
+        .css({
+                "left":`${utisak.width()}px`,
+                "position":"absolute"
+            })
+        .show()
+        .animate({
+            "left":"0px",
+            "opacity" : "1"
+        },
+        {
+            duration: 600,
+            queue : false,
+            complete: function(){
+                utisak.next().css("position","relative");
+            }
+        });
+        
+    $("#testimonial-wrapper a").hide();
+    clearTimeout(utisciTajmer);
+    utisciTajmer = setTimeout(function(){
+        utisakStrelice();
+    }, 800);
+}
+function utisakPrev(){
+    let utisak = $("#testimonial-slider .single-testimonial:visible");
+    utisak
+        .animate({
+            "left":`${utisak.width()}px`,
+            "opacity" : "0"
+        },
+        {
+            duration: 500,
+            queue : false,
+            complete : function(){
+                $(this).hide();
+            }
+        })    
+        .prev()
+        .css({
+            "left":`-${utisak.width()}px`,
+            "position":"absolute"
+        })
+        .show()
+        .animate(
+        {
+            "left":"0px",
+            "opacity" : "1"
+        },
+        {
+            duration: 600,
+            queue : false,
+            complete: function(){
+                utisak.prev().css("position","relative");
+            }
+        });
+        
+    $("#testimonial-wrapper a").hide();
+    clearTimeout(utisciTajmer);
+    utisciTajmer = setTimeout(function(){
+        utisakStrelice();
+    }, 800);
+}
+function utisakStrelice(){
+    if($("#testimonial-slider .single-testimonial:visible").next().length){
+        $("#tNext").fadeIn();
+    }
+    if($("#testimonial-slider .single-testimonial:visible").prev().length){
+        $("#tPrev").fadeIn();
+    }
+}
 
 //Contact forma validacija
 let textarea = document.contactForm.message;

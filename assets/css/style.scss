@@ -202,4 +202,33 @@
         object-fit: cover;
     }
 }
+.testimonial {
+    background-image: url("../img/bg/section-bg.jpg");
+    #testimonial-wrapper {
+        #testimonial-slider {
+            min-height: 600px;
+            @media only screen and (min-width: 992px){
+                min-height: 400px;
+            }
+            .single-testimonial {
+                position: relative;
+                opacity: 0;
+                display: none;
+            }
+        }
+        #tNext, #tPrev {
+            display: none;
+            position: absolute;
+            font-size: 2em;
+            background: rgba(0, 0, 0, .4);
+            padding: 10px;
+        }
+        #tNext{
+            right: 50px;
+        }
+        #tPrev {
+            left: 50px;
+        }
+    }
+}
 

@@ -260,4 +260,40 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+.testimonial {
+  background-image: url("../img/bg/section-bg.jpg");
+}
+
+.testimonial #testimonial-wrapper #testimonial-slider {
+  min-height: 600px;
+}
+
+@media only screen and (min-width: 992px) {
+  .testimonial #testimonial-wrapper #testimonial-slider {
+    min-height: 400px;
+  }
+}
+
+.testimonial #testimonial-wrapper #testimonial-slider .single-testimonial {
+  position: relative;
+  opacity: 0;
+  display: none;
+}
+
+.testimonial #testimonial-wrapper #tNext, .testimonial #testimonial-wrapper #tPrev {
+  display: none;
+  position: absolute;
+  font-size: 2em;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+}
+
+.testimonial #testimonial-wrapper #tNext {
+  right: 50px;
+}
+
+.testimonial #testimonial-wrapper #tPrev {
+  left: 50px;
+}
 /*# sourceMappingURL=style.css.map */
