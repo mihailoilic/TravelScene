@@ -28,22 +28,22 @@
   padding: 25px 0;
 }
 
-#mobile-button {
+#navigation #mobile-button {
   position: absolute;
   right: 15px;
 }
 
-#mobile-button span {
+#navigation #mobile-button span {
   font-size: 2em;
   color: #fff;
 }
 
-#mobile_menu {
+#navigation #mobile_menu {
   display: none;
   opacity: 0;
 }
 
-#mobile_menu ul {
+#navigation #mobile_menu ul {
   position: relative;
   top: 0px;
   left: 0px;
@@ -53,22 +53,22 @@
   list-style-type: none;
 }
 
-#mobile_menu ul li {
+#navigation #mobile_menu ul li {
   text-align: center;
   margin: 5px;
 }
 
-#mobile_menu ul li ul {
+#navigation #mobile_menu ul li ul {
   padding: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
 }
 
-#mobile_menu ul li ul a {
+#navigation #mobile_menu ul li ul a {
   padding: 0;
 }
 
-#main-menu {
+#navigation #main-menu {
   margin-top: 0px;
 }
 
@@ -150,11 +150,6 @@
   }
 }
 
-.single_package {
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
 #dealsWrapper {
   position: relative;
 }
@@ -203,6 +198,11 @@
 
 .modal #people option {
   color: #000;
+}
+
+.single_package {
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .error-message {

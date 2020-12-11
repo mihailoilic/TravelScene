@@ -64,6 +64,10 @@ let navigation = new Array(
         href: "#gallery"
     },
     {
+        title: "Testimonials",
+        href: "#testimonials"
+    },
+    {
         title: "Contact",
         href: "#contact"
     },
@@ -137,7 +141,7 @@ function mobileToggleClick(event){
 }
 
 //Home - Slajder
-//inicijalizacija slika za slajder
+//Inicijalizacija slika za slajder
 for(let i = 1; i < 4; i++){
     let temp = document.createElement("img");
     temp.setAttribute("src",`assets/img/slider/${i}.jpg`);
@@ -637,6 +641,7 @@ for(i in statistika){
                         </div></div></div>`;
 }
 $("#statisticsWrapper").html(statsHtml);
+//Statistika animacija
 function statsAnimation(){
     let prviPut = true;
     $(this).scroll(function(){
@@ -699,7 +704,7 @@ $(document).ready(function(){
 let utisci = new Array(
     {
         name: "Jessica",
-        review: "Meeting the Professional Travel Team really made a huge impression on me of how helpful, warm, and fun you all are.",
+        review: "Meeting your professional travel team really made a huge impression on me of how helpful, warm, and fun you all are.",
         img: "assets/img/review/1.png"
     },
     {
@@ -739,7 +744,7 @@ for(i in utisci){
                 </li></ul></div></div></div>`
 }
 $("#testimonial-slider").html(utisciHtml);
-//Inicijalizacija slajdera
+//Inicijalizacija slajdera sa utiscima
 $("#testimonial-slider .single-testimonial")
     .first()
     .css("opacity","1")
@@ -893,9 +898,14 @@ $(document.contactForm).on("submit", function(event){
         formError(forma.email, "Email can't be more than 50 characters long.");
         error = true;
     }
+    let subjectExp = /^\p{Uppercase_Letter}[\p{Letter}\.,\?!\/-]*(\s[\p{Letter}\.,\?!\/-]+)*$/u;
     if(forma.subject.value.length <= 30){
         if(forma.subject.value == "") {
             formError(forma.subject, "Please provide subject of your question.");
+            error = true;
+        }
+        else if(!subjectExp.test(forma.subject.value)) {
+            formError(forma.subject, "Subject is in incorrect form. First letter must be a capital. You can use symbols .,-/?!");
             error = true;
         }
     }
@@ -907,7 +917,7 @@ $(document.contactForm).on("submit", function(event){
         formError(forma.message, "Please write a message.");
         error = true;
     }
-    else if(forma.message.value.length <= 20) {
+    else if(forma.message.value.length < 20) {
         formError(forma.message, "Message is too short. Minimum characters: 20.");
         error = true;
     }
@@ -915,6 +925,6 @@ $(document.contactForm).on("submit", function(event){
         $("#submitButton").next()
             .fadeIn();
         forma.reset();
-        $(".word-count").text("200");
+        $(".word-count").text("200").fadeOut();
     }
 });
