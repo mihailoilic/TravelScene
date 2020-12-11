@@ -7,7 +7,7 @@ $(document).ready(function() {
     });
     $(this).scroll(navScrollEvent);
     $("#home .hero-text a").click(function(event){
-        scrollTo("#deals");
+        scrollToElement("#deals");
         event.preventDefault();
         $(this).blur();
     });
@@ -32,7 +32,7 @@ function navScrollEvent(){
         }
     }
 }
-function scrollTo(elementId){
+function scrollToElement(elementId){
     let skrol = elementTop(elementId);
     $("html").stop().animate({scrollTop:`${skrol}px`}, 400);
 }
@@ -76,29 +76,39 @@ let navLista = document.createElement("ul");
 document.querySelector("#main-menu").appendChild(navLista);
 let mobileLista = document.createElement("ul");
 document.querySelector("#mobile_menu").appendChild(mobileLista);
+let footerLista = document.createElement("ul");
+document.querySelector("#footer-nav").appendChild(footerLista);
 for (i in navigation){
     let navLi = document.createElement("li");
+    let navLi1 = document.createElement("li");
+    let navLi2 = document.createElement("li");
     navLi.classList.add("text-shadow");
     let navA = document.createElement("a");
     navA.setAttribute("href", navigation[i].href);
     navA.appendChild(document.createTextNode(navigation[i].title));
-    let navA1 = navA.cloneNode(true);
     navLi.appendChild(navA);
     navLista.appendChild(navLi);
-    let navLi1 = document.createElement("li");
+    let navA1 = navA.cloneNode(true);
     navLi1.appendChild(navA1);
     mobileLista.appendChild(navLi1);
+    let navA2 = navA.cloneNode(true);
+    navLi2.appendChild(navA2);
+    footerLista.appendChild(navLi2);
     navA.addEventListener("click", function(event) {
         event.preventDefault();
-        scrollTo($(this).attr("href"));
+        scrollToElement($(this).attr("href"));
         $(this).blur();
     });
     navA1.addEventListener("click", function(event) {
-        console.log("dfdfswdfasdvfas");
         event.preventDefault();
-        scrollTo($(this).attr("href"));
+        scrollToElement($(this).attr("href"));
         $(this).blur();
         mobileToggleClick(event);
+    });
+    navA2.addEventListener("click", function(event) {
+        event.preventDefault();
+        scrollToElement($(this).attr("href"));
+        $(this).blur();
     });
 }
 $("#mobile-button").click(mobileToggleClick);
@@ -387,7 +397,7 @@ function countrySelected(countryObj){
             createDeal(deal, countryObj.title);
         }
     },300);
-    scrollTo("#deals");
+    scrollToElement("#deals");
 }
 function openModal(dealObj,countryTitle){
     $(document.body).css("overflow", "hidden");
@@ -530,7 +540,7 @@ $("#bookForm").on("submit", function(event){
     }
 });
 
-//Top deals - dinamicko ispisivanje
+//Top deals - dinamicki sadrzaj
 let topDeals = ["ph0", "th1"];
 for(deal of topDeals){
     let country = deal.match(/[a-z]+/)[0];
@@ -615,9 +625,6 @@ $(document).ready(function(){
     });
 });
 
-//Galerija
-
-
 //Statistika firme - dinamicki sadrzaj
 let statistika = ["32652|Happy Customers|icofont-users-alt-3", "1821|Amazing Tours|icofont-airplane", "5660|In Business|icofont-handshake-deal", "11859|Support Cases|icofont-live-support"];
 let statsHtml = "";
@@ -676,12 +683,30 @@ function statsAnimation(){
     });
 }
 
+//Galerija - LightGallery plugin
+galleryHeight();
+$(window).resize(galleryHeight);
+function galleryHeight(){
+    $(".single-gallery").height($(".single-gallery").width());
+}
+$(document).ready(function(){
+    $("#lightgallery").lightGallery({
+        selector: ".single-gallery a"
+    });
+});
+
 //Utisci - dinamicki sadrzaj
 
 
 //Contact forma validacija
 let textarea = document.contactForm.message;
 $(textarea).on("keyup", function(){
+    if(textarea.value == "") {
+        $(".word-count").fadeOut();
+    }
+    else {
+        $(".word-count").fadeIn();
+    }
     if(textarea.value.length >= 200){
         $(".word-count").addClass("primary-color");
         textarea.value = textarea.value.substring(0,200);
@@ -748,5 +773,6 @@ $(document.contactForm).on("submit", function(event){
         $("#submitButton").next()
             .fadeIn();
         forma.reset();
+        $(".word-count").text("200");
     }
 });

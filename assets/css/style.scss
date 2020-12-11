@@ -187,9 +187,19 @@
     }
     .word-count {
         position: absolute;
+        display: none;
         font-size: 12px;
         top: 5px;
         right: 40px;
+    }
+}
+.lg-backdrop {
+    background: rgba(0, 0, 0, .85);
+}
+.single-gallery {
+    img {
+        height: 100%;
+        object-fit: cover;
     }
 }
 
