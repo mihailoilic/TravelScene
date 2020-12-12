@@ -263,6 +263,7 @@
 
 .testimonial {
   background-image: url("../img/bg/section-bg.jpg");
+  overflow: hidden;
 }
 
 .testimonial #testimonial-wrapper #testimonial-slider {

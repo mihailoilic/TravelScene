@@ -207,6 +207,7 @@
 }
 .testimonial {
     background-image: url("../img/bg/section-bg.jpg");
+    overflow: hidden;
     #testimonial-wrapper {
         #testimonial-slider {
             min-height: 600px;
