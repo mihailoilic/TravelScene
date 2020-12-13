@@ -598,7 +598,7 @@ $(document).ready(function(){
     let x = false;
     $(this).scroll(function(){
         let sectionDistanca = elementTop("#why_choose");
-        if($(this).scrollTop() > sectionDistanca - 600 && $(this).scrollTop() < sectionDistanca + $("#why_choose").height() - 200){
+        if($(this).scrollTop() > sectionDistanca - 500 && $(this).scrollTop() < sectionDistanca + $("#why_choose").height() - 200){
             if(!x){
                 $("#why_choose").stop()
                 .animate({"opacity":"1"}, 750);
